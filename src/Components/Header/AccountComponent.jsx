@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 
 function AccountComponent() {
     let Auth = useAuth();
+    useEffect(() => { retrieveUser() }, []);
     const headers = {
-        Authorization: `BearereyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGllbnZ1IiwiaWF0IjoxNjkyMjQyNjYzLCJleHAiOjE2OTMxMDY2NjN9.40VF9mM-mc9xRjg4Ue5ZEhgpv3uLibFNuUAFVSqNYSk`,
+        Authorization: `Bearer ${Auth.token}`,
     }
     let retrieveUser = async () => {
         try {
@@ -16,7 +17,6 @@ function AccountComponent() {
             console.log(error)
         }
     }
-    useEffect(() => { retrieveUser() }, []);
     return (
         <>
             <div>
