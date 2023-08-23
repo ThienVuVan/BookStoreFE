@@ -22,6 +22,7 @@ function LoginComponent() {
         onSubmit: async (values) => {
             try {
                 let response = await LoginApi(values)
+                Auth.setId(response.data.id)
                 Auth.setAuthenticated(true)
                 Auth.setUsername(response.data.username)
                 Auth.setToken(response.data.token)

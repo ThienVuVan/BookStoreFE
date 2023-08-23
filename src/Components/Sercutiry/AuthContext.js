@@ -11,6 +11,7 @@ function AuthProvider({ children }) {
     let [username, setUsername] = useState(null);
     let [token, setToken] = useState(null);
     let [refreshToken, setRefreshToken] = useState(null);
+    let [id, setId] = useState(null);
 
     let logout = () => {
         setAuthenticated(false);
@@ -21,8 +22,8 @@ function AuthProvider({ children }) {
     return (
         // set things in to context
         <AuthContext.Provider value={{
-            isAuthenticated, username, token, refreshToken,
-            logout, setAuthenticated, setUsername, setToken, setRefreshToken
+            isAuthenticated, username, token, refreshToken, id,
+            logout, setAuthenticated, setUsername, setToken, setRefreshToken, setId
         }}>
             {children}
         </AuthContext.Provider>
