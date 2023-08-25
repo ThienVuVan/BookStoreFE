@@ -8,22 +8,20 @@ export let useAuth = () => useContext(AuthContext);
 // share context with other component
 function AuthProvider({ children }) {
     let [isAuthenticated, setAuthenticated] = useState(false);
-    let [username, setUsername] = useState(null);
-    let [token, setToken] = useState(null);
-    let [refreshToken, setRefreshToken] = useState(null);
-    let [id, setId] = useState(null);
+    let [roles, setRoles] = useState([]);
 
+    // handle logout
     let logout = () => {
         setAuthenticated(false);
-        setUsername(null)
-        setToken(null)
-        setRefreshToken(null)
+        setRoles([])
+        sessionStorage.clear()
     }
+
     return (
         // set things in to context
         <AuthContext.Provider value={{
-            isAuthenticated, username, token, refreshToken, id,
-            logout, setAuthenticated, setUsername, setToken, setRefreshToken, setId
+            isAuthenticated, roles,
+            logout, setAuthenticated, setRoles
         }}>
             {children}
         </AuthContext.Provider>

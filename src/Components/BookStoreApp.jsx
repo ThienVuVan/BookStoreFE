@@ -2,12 +2,18 @@ import './BookStoreApp.scss'
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import HeaderComponent from './Header/HeaderComponent';
-import LoginComponent from './Auth/LoginComponent';
 import AuthProvider, { useAuth } from './Sercutiry/AuthContext';
+import HeaderComponent from './Header/HeaderComponent';
 import Home from './Home/Home';
+import LoginComponent from './Auth/LoginComponent';
 import SignUpComponent from './Auth/SignUpComponent';
-import AccountComponent from './Header/AccountComponent';
+import ShopComponent from './Shop/ShopComponent';
+import CreateShopComponent from './Shop/CreateShopComponent';
+import UpdateShopComponent from './Shop/UpdateShopComponent';
+import AccountComponent from './Account/AccountComponent';
+import UpdateAccountComponent from './Account/UpdateAccountComponent';
+import UpdateShopDetailComponent from './Shop/UpdateShopDetailComponent';
+
 
 function AuthenticatedRoute({ children }) {
     let Auth = useAuth();
@@ -26,15 +32,19 @@ function BookStoreApp() {
                     <HeaderComponent />
                     <Routes>
                         <Route path='/' element={<Home />} />
+                        <Route path='/home' element={<Home />} />
+
                         <Route path='/login' element={<LoginComponent />} />
                         <Route path='/signup' element={<SignUpComponent />} />
+
                         <Route path='/account' element={<AccountComponent />} />
-                        <Route path='/home' element={<Home />} />
-                        {/* <Route path='/logout' element={
-                            <AuthenticatedRoute>
-                                <LogoutComponent />
-                            </AuthenticatedRoute>
-                        } /> */}
+                        <Route path='/updateaccount' element={<UpdateAccountComponent />} />
+
+                        <Route path='/shop' element={<ShopComponent />} />
+                        <Route path='/createshop' element={<CreateShopComponent />} />
+                        <Route path='/updateshop' element={<UpdateShopComponent />} />
+                        <Route path='/updateshopdetail' element={<UpdateShopDetailComponent />} />
+
                     </Routes>
                     <ToastContainer
                         position="top-right"

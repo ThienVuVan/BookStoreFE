@@ -8,7 +8,7 @@ function HeaderComponent() {
             <div className="container">
                 <div className="row">
                     <nav className="navbar navbar-expand-lg">
-                        <a className="navbar-brand ms-2 fs-2 fw-bold text-black" href="/home">BookStore</a>
+                        <Link className='navbar-brand ms-2 fs-2 fw-bold text-black' to="/home">BookStore</Link>
                         <div className="collapse navbar-collapse">
                             <ul className="navbar-nav">
                                 <li className="nav-item fs-5">
@@ -28,6 +28,9 @@ function HeaderComponent() {
                             </li>
                             <li className="nav-item fs-5">
                                 {Auth.isAuthenticated && <Link className="nav-link" to="/account">Account</Link>}
+                            </li>
+                            <li className="nav-item fs-5">
+                                {Auth.isAuthenticated && Auth.roles.includes("ROLE_SHOP") && <Link className="nav-link" to="/shop">Shop</Link>}
                             </li>
                         </ul>
                     </nav>

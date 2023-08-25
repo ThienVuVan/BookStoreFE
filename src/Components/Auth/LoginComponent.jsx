@@ -22,14 +22,14 @@ function LoginComponent() {
         onSubmit: async (values) => {
             try {
                 let response = await LoginApi(values)
-                Auth.setId(response.data.id)
                 Auth.setAuthenticated(true)
-                Auth.setUsername(response.data.username)
-                Auth.setToken(response.data.token)
-                Auth.setRefreshToken(response.data.refreshToken)
+                Auth.setRoles(response.data.roles);
+                sessionStorage.setItem("userId", response.data.id);
+                sessionStorage.setItem("username", response.data.username)
+                sessionStorage.setItem("token", response.data.token)
+                sessionStorage.setItem("refreshToken", response.data.refreshToken)
                 toast.success("Login Success")
                 navigate("/home")
-                console.log(response)
             } catch (error) {
                 toast.success("Login Failed")
                 console.log(error)
