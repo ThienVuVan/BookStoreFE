@@ -1,0 +1,49 @@
+.book-data {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    text-align: left;
+
+    .info {
+        width: 35%;
+        border-right: 1px solid #ccc;
+    }
+
+    .detail {
+        width: 35%;
+        border-right: 1px solid #ccc;
+    }
+
+    .other {
+        width: 30%;
+        border-right: 1px solid #ccc;
+    }
+
+    .subcategory {
+        color: cadetblue;
+        text-decoration: none;
+        list-style: none;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
+    }
+}
+
+.setting {
+
+    button {
+        margin-top: 10px;
+        border-radius: 5px;
+        color: aqua;
+        background-color: black;
+    }
+}
+
+.create-book {
+    font-weight: bold;
+
+    .errorMsg {
+        color: red;
+    }
+}

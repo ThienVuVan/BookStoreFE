@@ -1,0 +1,30 @@
+.createshop {
+    border-bottom: 1px solid #ccc;
+
+    .form {
+        display: flex;
+
+        .shop-info {
+            width: 45%;
+            display: block;
+            border-right: 1px solid #ccc;
+        }
+
+        .shopdetail-info {
+            width: 45%;
+            display: block;
+            border-right: 1px solid #ccc;
+        }
+
+        .setting {
+            width: 10%;
+
+            button {
+                margin-top: 65px;
+                border-radius: 5px;
+                color: aqua;
+                background-color: black;
+            }
+        }
+    }
+}

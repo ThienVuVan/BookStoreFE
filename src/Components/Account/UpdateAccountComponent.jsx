@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import './UpdateAccount.scss';
 
 function UpdateAccountComponent() {
     let Navigate = useNavigate();
@@ -57,36 +58,34 @@ function UpdateAccountComponent() {
     useEffect(() => { retrieveUser() }, []);
 
     return (
-        <>
-            <div>
-                <form onSubmit={formik.handleSubmit}>
-                    <div>
-                        <label>UserName: </label>
-                        <input type="text" name="username"
-                            value={formik.values.username}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Email: </label>
-                        <input type="text" name="email"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>PhoneNumber: </label>
-                        <input type="text" name="phoneNumber"
-                            value={formik.values.phoneNumber}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <button type="submit"> Save Update </button>
-                    </div>
-                </form>
-            </div>
-        </>
+        <div className='update-account'>
+            <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label>UserName: </label>
+                    <input type="text" name="username"
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Email: </label>
+                    <input type="text" name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div>
+                    <label>PhoneNumber: </label>
+                    <input type="text" name="phoneNumber"
+                        value={formik.values.phoneNumber}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div>
+                    <button type="submit"> Save Update </button>
+                </div>
+            </form>
+        </div>
     )
 }
 

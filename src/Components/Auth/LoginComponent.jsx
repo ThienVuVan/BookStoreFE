@@ -4,6 +4,7 @@ import { useAuth } from '../Sercutiry/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { LoginApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
+import './Login.scss';
 
 
 function LoginComponent() {
@@ -31,17 +32,17 @@ function LoginComponent() {
                 toast.success("Login Success")
                 navigate("/home")
             } catch (error) {
-                toast.success("Login Failed")
+                toast.error("Login Failed")
                 console.log(error)
             }
         }
     })
 
     return (
-        <div>
-            <form className="infoform" onSubmit={formik.handleSubmit}>
+        <div className="login">
+            <form className="form" onSubmit={formik.handleSubmit}>
+                <label>UserName</label>
                 <div>
-                    <label>UserName: </label>
                     <input
                         type="text"
                         name="username"
@@ -54,8 +55,8 @@ function LoginComponent() {
                         <p className="errorMsg"> {formik.errors.username} </p>
                     )}
                 </div>
+                <label>Password</label>
                 <div>
-                    <label> Password </label>
                     <input
                         type="text"
                         id="password"
@@ -69,7 +70,7 @@ function LoginComponent() {
                     )}
                 </div>
                 <div>
-                    <button type="submit"> Login </button>
+                    <button className="button" type="submit"> Login </button>
                 </div>
             </form>
         </div>

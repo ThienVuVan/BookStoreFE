@@ -1,0 +1,22 @@
+.book {
+    display: flex;
+
+    .image {
+        width: 65%;
+    }
+
+    .info {
+        width: 35%;
+    }
+
+    .subcategory {
+        color: cadetblue;
+        text-decoration: none;
+        list-style: none;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
+    }
+}

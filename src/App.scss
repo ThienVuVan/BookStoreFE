@@ -1,0 +1,22 @@
+label,
+button,
+input {
+  margin: 5px;
+  padding: 5px;
+}
+
+.App {
+  text-align: center;
+
+  .content {
+    display: flex;
+
+    .sidebar {
+      width: 15%;
+    }
+
+    .main-content {
+      width: 85%;
+    }
+  }
+}

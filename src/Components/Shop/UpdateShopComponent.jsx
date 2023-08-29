@@ -8,8 +8,7 @@ import { useEffect } from 'react';
 function UpdateShopComponent() {
     let Navigate = useNavigate();
     const headers = {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
     }
     let retrieveShop = async () => {
@@ -32,6 +31,7 @@ function UpdateShopComponent() {
         initialValues: {
             userId: "",
             shopName: "",
+            shopLogo: null,
             shopAddress: "",
             contactPhone: "",
             contactEmail: ""
@@ -40,10 +40,10 @@ function UpdateShopComponent() {
             shopName: Yup.string().required("Required"),
             contactPhone: Yup.string().required("Required")
         }),
-        onSubmit: async (values) => {
-            console.log(values)
+        onSubmit: async () => {
+            console.log(formik.values)
             try {
-                await UpdateShopApi(values, headers)
+                await UpdateShopApi(formik.values, headers)
                 toast.success("Update Shop Success!")
                 Navigate("/shop")
             } catch (error) {
@@ -57,6 +57,11 @@ function UpdateShopComponent() {
         retrieveShop();
     }, [])
 
+    const handleChangeShopLogo = (event) => {
+        const selectedFile = event.target.files[0];
+        formik.setFieldValue('shopLogo', selectedFile);
+    }
+
     return (
         <div>
             <form className="infoform" onSubmit={formik.handleSubmit}>
@@ -69,6 +74,12 @@ function UpdateShopComponent() {
                     {formik.errors.username && (
                         <p className="errorMsg"> {formik.errors.username} </p>
                     )}
+                </div>
+                <div>
+                    <label>NewShopLogo: </label>
+                    <input type="file" name="shopLogo"
+                        onChange={handleChangeShopLogo}
+                    />
                 </div>
                 <div>
                     <label>ShopAddress: </label>

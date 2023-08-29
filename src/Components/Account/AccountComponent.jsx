@@ -2,6 +2,7 @@ import { GetUserById } from '../API/BookStoreApi';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Sercutiry/AuthContext';
+import './Account.scss';
 
 function AccountComponent() {
     let Auth = useAuth();
@@ -35,17 +36,21 @@ function AccountComponent() {
     }
 
     return (
-        <>
-            <div>
-                <div>Id : {userData.id}</div>
-                <div> Username:  {userData.username}</div>
-                <div> Email:  {userData.email}</div>
-                <div> Phonenumber:  {userData.phoneNumber}</div>
+        <div className='account'>
+            <div className='info'>
+                <ul>
+                    <li>Id : {userData.id}</li>
+                    <li>Username:  {userData.username}</li>
+                    <li>Email:  {userData.email}</li>
+                    <li>Phonenumber:  {userData.phoneNumber}</li>
+                </ul>
             </div>
-            <div><button onClick={handleUpdateAccont}>Update Account</button></div>
-            {!createShop && !Auth.roles.includes("ROLE_SHOP") && < div > <button onClick={handleCreateShop}>Create Shop</button></div >}
-
-        </>
+            <div className='setting'>
+                <div><button onClick={handleUpdateAccont}>Update Account</button></div>
+                <div><button onClick={() => Auth.logout()}>Logout</button></div>
+                {!createShop && !Auth.roles.includes("ROLE_SHOP") && < div > <button onClick={handleCreateShop}>Create Shop</button></div >}
+            </div>
+        </div>
     )
 }
 export default AccountComponent;

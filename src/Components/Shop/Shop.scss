@@ -1,0 +1,59 @@
+.shop {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+
+    .info {
+        text-align: left;
+        width: 80%;
+        border-right: 1px solid #ccc;
+        font-weight: bold;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    .setting {
+        text-align: left;
+        width: 20%;
+
+        div {
+            margin: 5px;
+
+            button {
+                border-radius: 5px;
+                color: aqua;
+                background-color: black;
+            }
+        }
+    }
+}
+
+.list-book {
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+
+    .book-table {
+        // border: 1px solid #ccc;
+        // border-left: none;
+        width: 100%;
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            border-left: none;
+            text-align: center;
+        }
+
+        button {
+            margin: 3px;
+            border-radius: 5px;
+            padding: 0;
+            color: aqua;
+            background-color: black;
+        }
+    }
+}

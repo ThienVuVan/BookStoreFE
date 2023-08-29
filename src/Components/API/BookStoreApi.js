@@ -15,7 +15,7 @@ export let GetUserById = (id, headers) => apiClient.get(`/api/v1/users?userId=${
 // http://localhost:8080/api/v1/users
 export let UpdateUser = (userUpdateRequest, headers) => apiClient.put(`/api/v1/users`, userUpdateRequest, { headers });
 // http://localhost:8080/api/v1/shops
-export let CreateShopApi = (shopRequest, headers) => apiClient.post(`/api/v1/shops`, shopRequest, { headers });
+export let CreateShopApi = (data, headers) => apiClient.post(`/api/v1/shops`, data, { headers });
 // http://localhost:8080/api/v1/shops
 export let GetShopApi = (userId, headers) => apiClient.get(`/api/v1/shops?userId=${userId}`, { headers });
 // http://localhost:8080/api/v1/shops
@@ -27,8 +27,22 @@ export let GetShopDetailApi = (shopId, headers) => apiClient.get(`/api/v1/shops/
 // http://localhost:8080/api/v1/shops/details
 export let UpdateShopDetailApi = (shopId, shopDetailsUpdateRequest, headers) => apiClient.put(`/api/v1/shops/details?shopId=${shopId}`, shopDetailsUpdateRequest, { headers });
 // http://localhost:8080/api/v1/books
-export let CreateBookApi = (shopId, bookRequest, bookDetailsRequest, listAuthor, listCategory, listImage, headers) =>
-    apiClient.post(`/api/v1/books?shopId=${shopId}`, bookRequest, bookDetailsRequest, listAuthor, listCategory, listImage, { headers });
+export let CreateBookApi = (shopId, data, headers) =>
+    apiClient.post(`/api/v1/books?shopId=${shopId}`, data, { headers });
+// http://localhost:8080/api/v1/books/shop
+export let GetBookForShopApi = (shopId, headers) => apiClient.get(`/api/v1/books/shop?shopId=${shopId}`, { headers });
+// http://localhost:8080/api/v1/books
+export let DeleteBookForShopApi = (bookId, headers) => apiClient.delete(`/api/v1/books?bookId=${bookId}`, { headers });
+// http://localhost:8080/api/v1/books
+export let GetBookByIdApi = (bookId, headers) => apiClient.get(`/api/v1/books?bookId=${bookId}`, { headers });
+// http://localhost:8080/api/v1/books
+export let UpdateBookApi = (bookId, data, headers) => apiClient.put(`/api/v1/books?bookId=${bookId}`, data, { headers });
+// http://localhost:8080/api/v1/books/pages
+export let GetBookByPageApi = (page, headers) => apiClient.get(`/api/v1/books/pages?page=${page}`, { headers });
+
+
+
+
 
 
 

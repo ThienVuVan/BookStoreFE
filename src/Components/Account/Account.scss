@@ -1,0 +1,29 @@
+.account {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+
+    .info {
+        text-align: left;
+        width: 80%;
+        border-right: 1px solid #ccc;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    .setting {
+        width: 20%;
+
+        div {
+            margin: 5px;
+
+            button {
+                border-radius: 5px;
+                color: aqua;
+                background-color: black;
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.book {
+    display: flex;
+    text-align: left;
+    font-weight: bold;
+
+    .image {
+        border: 1px solid #ccc;
+        width: 65%;
+    }
+
+    .info {
+        border: 1px solid #ccc;
+        width: 35%;
+    }
+}
+
+.book-detail {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+li {
+    list-style: none;
+}
