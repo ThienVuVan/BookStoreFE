@@ -3,4 +3,33 @@
         border-bottom: 1px solid #ccc;
     }
 
+    .home-list-book {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 10px;
+        padding: 10px;
+        justify-content: none;
+
+        .item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: aquamarine;
+
+            .image {
+                .image-item {
+                    height: 150px;
+                    width: 200px;
+                }
+            }
+
+            .info {
+                padding: 5px;
+                text-align: left;
+            }
+        }
+    }
+
 }

@@ -35,10 +35,18 @@ export let GetBookForShopApi = (shopId, headers) => apiClient.get(`/api/v1/books
 export let DeleteBookForShopApi = (bookId, headers) => apiClient.delete(`/api/v1/books?bookId=${bookId}`, { headers });
 // http://localhost:8080/api/v1/books
 export let GetBookByIdApi = (bookId, headers) => apiClient.get(`/api/v1/books?bookId=${bookId}`, { headers });
+// http://localhost:8080/api/v1/books/details
+export let GetBookDetailByIdApi = (bookId, headers) => apiClient.get(`/api/v1/books/details?bookId=${bookId}`, { headers });
 // http://localhost:8080/api/v1/books
 export let UpdateBookApi = (bookId, data, headers) => apiClient.put(`/api/v1/books?bookId=${bookId}`, data, { headers });
 // http://localhost:8080/api/v1/books/pages
 export let GetBookByPageApi = (page, headers) => apiClient.get(`/api/v1/books/pages?page=${page}`, { headers });
+// http://localhost:8080/api/v1/users/reviews
+export let CreateReviewApi = (data, headers) => apiClient.post(`/api/v1/users/reviews`, data, { headers });
+// http://localhost:8080/api/v1/books/reviews/page
+export let GetReviewApi = (bookId, page, headers) => apiClient.get(`/api/v1/books/reviews/page?bookId=${bookId}&page=${page}`, { headers });
+// http://localhost:8080/api/v1/orders
+export let CreateOrders = (data, headers) => apiClient.post(`/api/v1/orders`, data, { headers });
 
 
 

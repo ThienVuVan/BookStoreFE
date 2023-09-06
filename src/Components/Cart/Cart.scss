@@ -1,0 +1,88 @@
+.cart {
+    display: flex;
+
+    .cart-item-container {
+        width: 85%;
+
+        .cart-item {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 5px;
+            text-align: left;
+            display: flex;
+            font-weight: bold;
+            font-size: 20px;
+
+            div {
+                width: 25%;
+                display: grid;
+                align-items: center;
+
+                button {
+                    width: fit-content;
+                    border-radius: 5px;
+                    color: aqua;
+                    background-color: black;
+                }
+            }
+
+            img {
+                border-radius: 10px;
+                margin-right: 30px;
+                width: 100px;
+                height: 100px;
+
+            }
+
+            .number {
+                display: flex;
+
+                span {
+                    margin: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .control {
+        width: 15%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 5px;
+
+        button {
+            border-radius: 5px;
+            color: aqua;
+            background-color: black;
+            margin-top: 50%;
+        }
+    }
+
+}
+
+.bill {
+    padding: 5px;
+
+    .bill-item {
+        text-align: left;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+
+        span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    button {
+        border-radius: 5px;
+        color: aqua;
+        background-color: black;
+    }
+}

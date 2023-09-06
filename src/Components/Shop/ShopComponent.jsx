@@ -10,6 +10,7 @@ function ShopComponent() {
     let Navigate = useNavigate();
     let [shopData, setShopData] = useState({});
     let [bookData, setBookData] = useState([]);
+    let [shopLogoPath, setShopLogoPath] = useState("");
     let [deleteBookMark, setDeleteBookMark] = useState(true);
     const headers = {
         'Content-Type': 'application/json',
@@ -20,8 +21,9 @@ function ShopComponent() {
     let retrieveShop = async () => {
         try {
             let response = await GetShopApi(sessionStorage.getItem("userId"), headers);
-            sessionStorage.setItem("shopId", response.data.id);
-            setShopData(response.data);
+            sessionStorage.setItem("shopId", response.data.id)
+            setShopData(response.data)
+            setShopLogoPath(response.data.shopLogoPath.substring(30))
         }
         catch (error) {
             console.log(error);
@@ -94,13 +96,13 @@ function ShopComponent() {
             <div className="shop">
                 <div className="info">
                     <ul>
+                        <li><img src={shopLogoPath} style={{ width: "200px", height: "200px" }}></img></li>
                         <li> ShopId: {shopData.id} </li>
                         <li> ShopName: {shopData.shopName} </li>
-                        <li> ShopLogo: {shopData.shopLogoPath} </li>
                         <li> ShopAddress: {shopData.shopAddress} </li>
                         <li> ShopContactPhone: {shopData.contactPhone} </li>
                         <li> ShopContactEmail: {shopData.contactEmail} </li>
-                    </ul>
+                    </ul>``
                 </div>
                 <div className="setting">
                     <div><button onClick={handleUpdateShop}>Update Shop</button></div>

@@ -5,20 +5,104 @@
 
     .image {
         border: 1px solid #ccc;
+        border-radius: 10px;
         width: 65%;
+        margin: 5px;
+
+        img {
+            width: 30%;
+            height: 200px;
+            margin: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
     }
 
     .info {
         border: 1px solid #ccc;
+        border-radius: 10px;
         width: 35%;
+        margin: 5px;
+
+        button {
+            border-radius: 5px;
+            color: aqua;
+            background-color: black;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        span {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 10px;
+            font-size: 20px;
+            color: #f08d0c;
+        }
+
+        .click {
+            cursor: pointer;
+        }
     }
 }
 
 .book-detail {
     font-weight: bold;
     border: 1px solid #ccc;
+    border-radius: 10px;
     text-align: left;
+    margin: 5px;
 }
+
+.rate {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: left;
+    margin: 5px;
+}
+
+.comment {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: left;
+    margin: 5px;
+    display: grid;
+
+    label {
+        font-size: 20px;
+    }
+
+    .view-comment {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 10px;
+        padding-left: 10px;
+    }
+
+    .form {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px;
+        text-align: left;
+
+        .button {
+            border-radius: 5px;
+            color: aqua;
+            background-color: black;
+            padding: 0;
+        }
+
+        input {
+            padding: 0;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+
 
 li {
     list-style: none;

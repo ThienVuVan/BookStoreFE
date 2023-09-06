@@ -18,6 +18,7 @@ import SideBar from './Components/Header/SideBar';
 import CreateBookComponent from './Components/Book/CreateBookComponent';
 import BookDetailComponent from './Components/Book/BookDetailComponent';
 import UpdateBookComponent from './Components/Book/UpdateBookComponent';
+import CartComponent from './Components/Cart/CartComponent';
 
 function AuthenticatedRoute({ children }) {
   let Auth = useAuth();
@@ -56,6 +57,8 @@ function App() {
                 <Route path='/createbook' element={<AuthenticatedRoute><CreateBookComponent /></AuthenticatedRoute>} />
                 <Route path='/bookdetail/:id' element={<AuthenticatedRoute><BookDetailComponent /></AuthenticatedRoute>} />
                 <Route path='/updatebook/:id' element={<AuthenticatedRoute><UpdateBookComponent /></AuthenticatedRoute>} />
+
+                <Route path='/cart' element={<AuthenticatedRoute><CartComponent /></AuthenticatedRoute>} />
 
               </Routes>
             </main>

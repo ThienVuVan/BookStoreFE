@@ -21,7 +21,7 @@ function HeaderComponent() {
                             {!Auth.isAuthenticated && <Link className="link" to="/login">Login</Link>}
                         </li>
                         <li className="li">
-                            {Auth.isAuthenticated && <Link className="link" to="/account">Cart</Link>}
+                            {Auth.isAuthenticated && <Link className="link" to="/cart">Cart</Link>}
                         </li>
                         <li className="navbar-ul-li">
                             {Auth.isAuthenticated && Auth.roles.includes("ROLE_SHOP") && <Link className="link" to="/shop">Shop</Link>}

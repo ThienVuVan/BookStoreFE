@@ -36,21 +36,27 @@ function AccountComponent() {
     }
 
     return (
-        <div className='account'>
-            <div className='info'>
-                <ul>
-                    <li>Id : {userData.id}</li>
-                    <li>Username:  {userData.username}</li>
-                    <li>Email:  {userData.email}</li>
-                    <li>Phonenumber:  {userData.phoneNumber}</li>
-                </ul>
+        <>
+            <div className='account'>
+                <div className='info'>
+                    <ul>
+                        <li>Id : {userData.id}</li>
+                        <li>Username:  {userData.username}</li>
+                        <li>Email:  {userData.email}</li>
+                        <li>Phonenumber:  {userData.phoneNumber}</li>
+                    </ul>
+                </div>
+                <div className='setting'>
+                    <div><button onClick={handleUpdateAccont}>Update Account</button></div>
+                    <div><button onClick={() => Auth.logout()}>Logout</button></div>
+                    {!createShop && !Auth.roles.includes("ROLE_SHOP") && < div > <button onClick={handleCreateShop}>Create Shop</button></div >}
+                </div>
             </div>
-            <div className='setting'>
-                <div><button onClick={handleUpdateAccont}>Update Account</button></div>
-                <div><button onClick={() => Auth.logout()}>Logout</button></div>
-                {!createShop && !Auth.roles.includes("ROLE_SHOP") && < div > <button onClick={handleCreateShop}>Create Shop</button></div >}
+            <div className='orders'>
+                list all orders here
             </div>
-        </div>
+        </>
+
     )
 }
 export default AccountComponent;
