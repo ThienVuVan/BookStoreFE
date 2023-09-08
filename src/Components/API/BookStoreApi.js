@@ -47,6 +47,10 @@ export let CreateReviewApi = (data, headers) => apiClient.post(`/api/v1/users/re
 export let GetReviewApi = (bookId, page, headers) => apiClient.get(`/api/v1/books/reviews/page?bookId=${bookId}&page=${page}`, { headers });
 // http://localhost:8080/api/v1/orders
 export let CreateOrders = (data, headers) => apiClient.post(`/api/v1/orders`, data, { headers });
+// http://localhost:8080/api/v1/users/orders
+export let GetOrderForUserApi = (userId, headers) => apiClient.get(`/api/v1/users/orders?userId=${userId}`, { headers });
+// http://localhost:8080/api/v1/shops/orders
+export let GetOrderForShopApi = (shopId, data, headers) => apiClient.get(`/api/v1/shops/orders?shopId=${shopId}`, data, { headers });
 
 
 

@@ -57,3 +57,25 @@
         }
     }
 }
+
+.orders-filter {
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+
+    table {
+        td {
+            width: 150px;
+        }
+
+        button {
+            border-radius: 5px;
+            color: aqua;
+            background-color: black;
+        }
+    }
+
+
+}

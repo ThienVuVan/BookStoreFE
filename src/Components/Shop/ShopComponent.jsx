@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAuth } from '../Sercutiry/AuthContext';
-import { GetShopApi, DeleteShopApi, GetBookForShopApi, DeleteBookForShopApi } from "../API/BookStoreApi";
+import { GetShopApi, DeleteShopApi, GetBookForShopApi, DeleteBookForShopApi, GetOrderForShopApi } from "../API/BookStoreApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import './Shop.scss';
+import { useFormik } from "formik";
 
 function ShopComponent() {
     let Auth = useAuth();
@@ -91,6 +92,27 @@ function ShopComponent() {
         Navigate(`/updatebook/${bookId}`)
     }
 
+    // get order
+
+    let orderRequest = useFormik({
+        initialValues: {
+            id: "",
+            date: "",
+            totalPrice: "",
+            DeliveryAddress: "",
+            orderStatus: ""
+        },
+        onSubmit: async (values) => {
+            try {
+                let response = await GetOrderForShopApi(sessionStorage.getItem("shopId"), values, headers)
+                console.log(response.data)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+    })
+
     return (
         <>
             <div className="shop">
@@ -141,9 +163,49 @@ function ShopComponent() {
                     }
                 </table>
             </div>
+            <div className="orders-filter">
+                <form className="form" onSubmit={orderRequest.handleSubmit}>
+                    <table>
+                        <tr>
+                            <td>OrderId</td>
+                            <td> <input type="number" name="id" value={orderRequest.values.id} onChange={orderRequest.handleChange} /></td>
+                        </tr>
+                        <tr>
+                            <td>Order Date</td>
+                            <td><input type="date" name="date" value={orderRequest.values.date} onChange={orderRequest.handleChange} /></td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td><input type="number" name="totalPrice" value={orderRequest.values.totalPrice} onChange={orderRequest.handleChange} /></td>
+                        </tr>
+                        <tr>
+                            <td>DeliveryAddress</td>
+                            <td><input type="text" name="DeliveryAddress" value={orderRequest.values.DeliveryAddress} onChange={orderRequest.handleChange} /></td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                <select name="orderStatus" value={orderRequest.values.orderStatus} onChange={orderRequest.handleChange}>
+                                    <option value="">Select Status</option>
+                                    <option value="Order Placement">Order Placement</option>
+                                    <option value="Order Processing">Order Processing</option>
+                                    <option value="Order Fulfillment">Order Fulfillment</option>
+                                    <option value="Delivery Preparation">Delivery Preparation</option>
+                                    <option value="Shipping">Shipping</option>
+                                    <option value="Delivery">Delivery</option>
+                                    <option value="Successful Delivery">Successful Delivery</option>
+                                    <option value="Return">Return</option>
+                                    <option value="Canceled Order">Canceled Order</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td><button type="submit"> Filter </button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </>
-
-
     )
 }
 

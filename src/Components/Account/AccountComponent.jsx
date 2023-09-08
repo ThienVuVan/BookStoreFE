@@ -1,4 +1,4 @@
-import { GetUserById } from '../API/BookStoreApi';
+import { GetUserById, GetOrderForUserApi } from '../API/BookStoreApi';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Sercutiry/AuthContext';
@@ -9,6 +9,7 @@ function AccountComponent() {
     let Navigate = useNavigate();
     let [createShop, setCreateShop] = useState(false);
     let [userData, setUserData] = useState({});
+    let [ordersData, setOrdersData] = useState([]);
     const headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -17,8 +18,11 @@ function AccountComponent() {
 
     async function retrieveUser() {
         try {
-            let response = await GetUserById(sessionStorage.getItem("userId"), headers);
-            setUserData(response.data)
+            let response1 = await GetUserById(sessionStorage.getItem("userId"), headers);
+            setUserData(response1.data)
+            let response2 = await GetOrderForUserApi(sessionStorage.getItem("userId"), headers);
+            setOrdersData(response2.data)
+            console.log(response2.data)
         } catch (error) {
             console.log(error)
         }
@@ -53,7 +57,18 @@ function AccountComponent() {
                 </div>
             </div>
             <div className='orders'>
-                list all orders here
+                <span className='orders-label'>Your Orders</span>
+                {ordersData.map((order) => (
+                    <div className='order'>
+                        <li>OrderId: {order.id}</li>
+                        <li>Order Price: {order.totalPrice}</li>
+                        <li>Order Date: {order.date}</li>
+                        <li>Order Address: {order.deliveryAddress}</li>
+                        <li>Order Status: {order.orderStatus}</li>
+                    </div>
+                ))
+
+                }
             </div>
         </>
 

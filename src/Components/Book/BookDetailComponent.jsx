@@ -29,8 +29,6 @@ function BookDetailComponent() {
         try {
             let response = await GetReviewApi(id, 0, headers)
             setReviewData(response.data)
-            console.log(response.data)
-            console.log(reviewData)
         }
         catch (error) {
             console.log(error)
@@ -72,12 +70,12 @@ function BookDetailComponent() {
     let handleAddCart = () => {
         if (localStorage.getItem("BookIdCartList") == null) {
             let BookIdCartList = []
-            BookIdCartList.push({ id, bookNumber, "shopId": bookData.shopId })
+            BookIdCartList.push({ "bookId": id, "title": bookData.title, "price": bookData.price, "bookNumber": bookNumber, "shopId": bookData.shopId, "shopName": bookData.shopName })
             localStorage.setItem("BookIdCartList", JSON.stringify(BookIdCartList))
             toast.success("Add Book To Cart Success!")
         } else {
             let ExistBookIdCartList = JSON.parse(localStorage.getItem("BookIdCartList"))
-            ExistBookIdCartList.push({ id, bookNumber, "shopId": bookData.shopId })
+            ExistBookIdCartList.push({ "bookId": id, "title": bookData.title, "price": bookData.price, "bookNumber": bookNumber, "shopId": bookData.shopId, "shopName": bookData.shopName })
             localStorage.setItem("BookIdCartList", JSON.stringify(ExistBookIdCartList))
             toast.success("Add Book To Cart Success!")
         }
