@@ -42,5 +42,39 @@
         border-radius: 10px;
         margin: 5px;
         padding-left: 10px;
+
+        button {
+            padding: 0px 2px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .evaluate {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 5px;
+        padding-left: 10px;
+
+        table {
+            text-align: left;
+
+            tr {
+                border-bottom: 1px solid #ccc;
+
+                td {
+                    width: 150px;
+
+                    input {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+
+        button {
+            padding: 0;
+            border-radius: 5px;
+        }
     }
 }

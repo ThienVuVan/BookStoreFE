@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from 'react-router-dom';
-import { GetBookByIdApi, UpdateBookApi } from "../API/BookStoreApi";
+import { UpdateBookApi, GetBookDetailByIdApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useAuth } from '../Sercutiry/AuthContext';
@@ -13,8 +13,6 @@ function UpdateBookComponent() {
     let Navigate = useNavigate()
     let [bookImages, setBookImages] = useState([])
     const [categories, setCategories] = useState(Auth.categoriesData)
-    let [select, setSelect] = useState(false)
-    let [selectCategory, setSelectCategory] = useState("")
     const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -26,7 +24,7 @@ function UpdateBookComponent() {
 
     let retrieveBookData = async () => {
         try {
-            let response = await GetBookByIdApi(id, headers)
+            let response = await GetBookDetailByIdApi(id, headers)
             formik.setValues({
                 title: response.data.title,
                 price: response.data.price,
@@ -39,7 +37,7 @@ function UpdateBookComponent() {
                 numberOfPages: response.data.numberOfPages,
                 publishingHouse: response.data.publishingHouse,
                 description: response.data.description,
-                author: response.data.author,
+                authors: response.data.author,
                 category: response.data.category,
                 newCategoryId: null,
                 newImages: [],
@@ -63,7 +61,7 @@ function UpdateBookComponent() {
             numberOfPages: "",
             publishingHouse: "",
             description: "",
-            author: "",
+            authors: "",
             category: "",
             newCategoryId: null,
             newImages: [],
@@ -71,6 +69,7 @@ function UpdateBookComponent() {
         validationSchema: Yup.object({
         }),
         onSubmit: async (values) => {
+            console.log(values)
             try {
                 await UpdateBookApi(id, values, headers)
                 Navigate("/shop")
@@ -82,16 +81,6 @@ function UpdateBookComponent() {
             }
         }
     })
-
-    const handleViewSelect = () => {
-        setSelect(!select)
-    }
-
-    const handleSelectCategory = (id, name) => {
-        formik.setFieldValue("newCategoryId", id)
-        setSelectCategory(name)
-        setSelect(!select)
-    }
 
     const handleImageChange = (event) => {
         const selectedFiles = event.target.files[0]
@@ -146,7 +135,7 @@ function UpdateBookComponent() {
                         </div>
                         <div>
                             <label>Authors </label>
-                            <input type="text" name="author" value={formik.values.author}
+                            <input type="text" name="authors" value={formik.values.authors}
                                 onChange={formik.handleChange}
                             />
                         </div>
@@ -156,25 +145,20 @@ function UpdateBookComponent() {
                                 onChange={formik.handleChange}
                             />
                         </div>
-                        {!select &&
-                            <div>
-                                <label>New Category </label>
-                                <input type="text" name="categoryId" value={selectCategory}
-                                    onClick={handleViewSelect}
-                                />
-                            </div>
-                        }
-                        {select &&
-                            categories.map((category) => (
-                                <div>
-                                    <ul>
-                                        {category.subcategories.map((subcategory, index) => (
-                                            <li className="subcategory" onClick={() => handleSelectCategory(subcategory.id, subcategory.name)}>{subcategory.name}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))
-                        }
+                        <div>
+                            <label>New Category</label>
+                            <select name="newCategoryId" value={formik.values.newCategoryId} onChange={formik.handleChange}>
+                                <option value="">none</option>
+                                {categories.map((category) => {
+                                    return (
+                                        category.subcategories.map((subcategory) => (
+                                            <option value={subcategory.id}>{subcategory.name}</option>
+                                        ))
+                                    )
+                                })
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div className='book-detail'>

@@ -10,8 +10,6 @@ import { useAuth } from '../Sercutiry/AuthContext';
 function CreateBookComponent() {
     let Auth = useAuth()
     const [categories, setCategories] = useState(Auth.categoriesData)
-    let [select, setSelect] = useState(false)
-    let [selectCategory, setSelectCategory] = useState("")
     let Navigate = useNavigate()
     const headers = {
         'Content-Type': 'multipart/form-data',
@@ -54,16 +52,6 @@ function CreateBookComponent() {
     const handleImageChange = (event) => {
         const selectedFiles = event.target.files[0]
         formik.setFieldValue("images", [...formik.values.images, selectedFiles])
-    }
-
-    const handleViewSelect = () => {
-        setSelect(!select)
-    }
-
-    const handleSelectCategory = (id, name) => {
-        formik.setFieldValue("categoryId", id)
-        setSelectCategory(name)
-        setSelect(!select)
     }
 
     return (
@@ -161,24 +149,20 @@ function CreateBookComponent() {
                                 placeholder="Enter your author"
                             />
                         </div>
-                        {!select &&
-                            <div>
-                                <label>Categories</label>
-                                <input type="text" name="categoryId" value={selectCategory}
-                                    onClick={handleViewSelect}
-                                    placeholder="Select category"
-                                />
-                            </div>
-                        }
-                        {select &&
-                            categories.map((category) => (
-                                <div>
-                                    {category.subcategories.map((subcategory, index) => (
-                                        <li className="subcategory" onClick={() => handleSelectCategory(subcategory.id, subcategory.name)}>{subcategory.name}</li>
-                                    ))}
-                                </div>
-                            ))
-                        }
+                        <div>
+                            <label>Category</label>
+                            <select name="categoryId" value={formik.values.categoryId} onChange={formik.handleChange}>
+                                <option value="">none</option>
+                                {categories.map((category) => {
+                                    return (
+                                        category.subcategories.map((subcategory) => (
+                                            <option value={subcategory.id}>{subcategory.name}</option>
+                                        ))
+                                    )
+                                })
+                                }
+                            </select>
+                        </div>
                         <div>
                             <label>Image</label>
                             <input type="file" name="image1" accept="image/*" onChange={handleImageChange} />

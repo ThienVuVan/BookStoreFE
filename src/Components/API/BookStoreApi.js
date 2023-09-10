@@ -50,8 +50,15 @@ export let CreateOrders = (data, headers) => apiClient.post(`/api/v1/orders`, da
 // http://localhost:8080/api/v1/users/orders
 export let GetOrderForUserApi = (userId, headers) => apiClient.get(`/api/v1/users/orders?userId=${userId}`, { headers });
 // http://localhost:8080/api/v1/shops/orders
-export let GetOrderForShopApi = (shopId, data, headers) => apiClient.get(`/api/v1/shops/orders?shopId=${shopId}`, data, { headers });
-
+export let GetOrderForShopApi = (shopId, data, headers) => apiClient.post(`/api/v1/shops/orders?shopId=${shopId}`, data, { headers });
+// http://localhost:8080/api/v1/books/filter
+export let GetBookByCondition = (data, headers) => apiClient.post(`/api/v1/books/filter`, data, { headers });
+// http://localhost:8080/api/v1/orders/items
+export let GetOrderItemsApi = (orderId, headers) => apiClient.get(`/api/v1/orders/items?orderId=${orderId}`, { headers });
+// http://localhost:8080/api/v1/books/rates/count
+export let GetRateApi = (bookId, headers) => apiClient.get(`/api/v1/books/rates/count?bookId=${bookId}`, { headers });
+// http://localhost:8080/api/v1/orders
+export let UpdateOrderApi = (orderId, orderStatus, data, headers) => apiClient.put(`/api/v1/orders?orderId=${orderId}&orderStatus=${orderStatus}`, data, { headers });
 
 
 

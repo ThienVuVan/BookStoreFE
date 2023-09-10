@@ -1,15 +1,14 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
 import { useNavigate, useParams } from 'react-router-dom';
-import { GetBookDetailByIdApi, CreateReviewApi, GetReviewApi } from "../API/BookStoreApi";
-import { toast } from "react-toastify";
+import { GetBookDetailByIdApi, GetReviewApi, GetRateApi } from "../API/BookStoreApi";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import './BookDetail.scss'
 function BookDetailComponent() {
     let { id } = useParams()
     let [bookData, setBookData] = useState({})
     let [bookImages, setBookImages] = useState([])
     let [reviewData, setReviewData] = useState([])
+    let [rateData, setRateData] = useState({})
     let [bookNumber, setBookNumber] = useState(1)
     const headers = {
         'Content-Type': 'multipart/form-data',
@@ -18,17 +17,15 @@ function BookDetailComponent() {
 
     let retrieveBook = async () => {
         try {
-            let response = await GetBookDetailByIdApi(id, headers)
-            setBookData(response.data)
-            setBookImages(response.data.images)
-        }
-        catch (error) {
-            console.log(error)
-        }
+            let response1 = await GetBookDetailByIdApi(id, headers)
+            setBookData(response1.data)
+            setBookImages(response1.data.images)
 
-        try {
-            let response = await GetReviewApi(id, 0, headers)
-            setReviewData(response.data)
+            let response2 = await GetReviewApi(id, 0, headers)
+            setReviewData(response2.data)
+
+            let response3 = await (GetRateApi(id, headers))
+            setRateData(response3.data)
         }
         catch (error) {
             console.log(error)
@@ -39,27 +36,6 @@ function BookDetailComponent() {
         retrieveBook()
     }, [])
 
-    let comment = useFormik({
-        initialValues: {
-            userId: sessionStorage.getItem("userId"),
-            bookId: id,
-            comment: "",
-            image: [],
-        },
-        validationSchema: Yup.object({
-            comment: Yup.string().required("Required")
-        }),
-        onSubmit: async (values) => {
-            try {
-                await CreateReviewApi(values, headers)
-                toast.success("Create Comment Success!")
-            }
-            catch (error) {
-                console.log(error)
-                toast.error("Create Comment Failed!")
-            }
-        }
-    })
 
     let handleMinusBookNumber = () => {
         setBookNumber(bookNumber - 1)
@@ -81,10 +57,6 @@ function BookDetailComponent() {
         }
     }
 
-    let handleChangeImage = (event) => {
-        const selectedFiles = event.target.files[0]
-        comment.setFieldValue("image", [...comment.values.image, selectedFiles])
-    }
     return (
         <>
             <div className="book">
@@ -124,29 +96,45 @@ function BookDetailComponent() {
                     <li>Description: {bookData.description}</li>
                 </ul>
             </div>
-            <div className="rate"> rate here</div>
+            <div className="rate">
+                <table>
+                    <tr>
+                        <td>Five Star</td>
+                        <td>{rateData.fiveStar}</td>
+                    </tr>
+                    <tr>
+                        <td>Four Star</td>
+                        <td>{rateData.fourStar}</td>
+                    </tr>
+                    <tr>
+                        <td>Three Star</td>
+                        <td>{rateData.threeStar}</td>
+                    </tr>
+                    <tr>
+                        <td>Two Star</td>
+                        <td>{rateData.twoStar}</td>
+                    </tr>
+                    <tr>
+                        <td>One Star</td>
+                        <td>{rateData.oneStar}</td>
+                    </tr>
+                </table>
+            </div>
             <div className="comment">
                 <label>Comment</label>
-                <form className="form" onSubmit={comment.handleSubmit}>
-                    <div>
-                        <input type="text" name="comment"
-                            value={comment.values.comment}
-                            onChange={comment.handleChange}
-                            placeholder="New comment"
-                        />
-                    </div>
-                    <div>
-                        <input type="file" accept="image/*" onChange={handleChangeImage} />
-                    </div>
-                    <div>
-                        <button className="button" type="submit"> Create </button>
-                    </div>
-                </form>
                 {
                     reviewData.map((item) => (
                         <div className="view-comment">
-                            <li>User: {item.username}</li>
-                            <li>Comment: {item.comment}</li>
+                            <table>
+                                <tr>
+                                    <td className='name'>User:</td>
+                                    <td>{item.username}</td>
+                                </tr>
+                                <tr>
+                                    <td className='name'>Comment:</td>
+                                    <td>{item.comment}</td>
+                                </tr>
+                            </table>
                         </div>
                     ))
                 }

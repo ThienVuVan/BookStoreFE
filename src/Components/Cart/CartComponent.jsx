@@ -139,8 +139,7 @@ function CartComponent() {
         try {
             ordersData.forEach(async (orderData) => {
                 try {
-                    // console.log(orderData)
-                    // await CreateOrders(orderData, headers)
+                    await CreateOrders(orderData, headers)
                 }
                 catch (error) {
                     console.log(error)

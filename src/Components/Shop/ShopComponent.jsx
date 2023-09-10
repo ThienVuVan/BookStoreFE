@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuth } from '../Sercutiry/AuthContext';
-import { GetShopApi, DeleteShopApi, GetBookForShopApi, DeleteBookForShopApi, GetOrderForShopApi } from "../API/BookStoreApi";
+import { GetShopApi, DeleteShopApi, GetBookForShopApi, DeleteBookForShopApi, GetOrderForShopApi, UpdateOrderApi, GetOrderItemsApi } from "../API/BookStoreApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import './Shop.scss';
 import { useFormik } from "formik";
+import { date } from "yup";
 
 function ShopComponent() {
     let Auth = useAuth();
@@ -94,24 +95,72 @@ function ShopComponent() {
 
     // get order
 
+    let [ordersData, setOrdersData] = useState([])
     let orderRequest = useFormik({
         initialValues: {
-            id: "",
-            date: "",
-            totalPrice: "",
-            DeliveryAddress: "",
-            orderStatus: ""
+            id: null,
+            date: null,
+            totalPrice: null,
+            DeliveryAddress: null,
+            orderStatus: null
         },
         onSubmit: async (values) => {
+            if (values.orderStatus === "") values.orderStatus = null;
             try {
                 let response = await GetOrderForShopApi(sessionStorage.getItem("shopId"), values, headers)
-                console.log(response.data)
+                setOrdersData(response.data)
             }
             catch (error) {
                 console.log(error)
             }
         }
     })
+
+    // update order
+    let orderStatus = ""
+    let handleStatusChange = (event) => {
+        orderStatus = event.target.value
+    }
+
+    let handleUpdateOrder = async (orderId) => {
+        try {
+            await UpdateOrderApi(orderId, orderStatus, null, headers)
+            toast.success("Update Success!")
+            // load data again
+            let response = await GetOrderForShopApi(sessionStorage.getItem("shopId"), {
+                id: null,
+                date: null,
+                totalPrice: null,
+                DeliveryAddress: null,
+                orderStatus: null
+            }, headers)
+            setOrdersData(response.data)
+
+        }
+        catch (error) {
+            console.log(error)
+            toast.error("Update Failed!")
+        }
+    }
+
+    // view orderItems of order
+    let [orderItems, setOrderItems] = useState([])
+    let [viewOrderItems, setViewOrderItems] = useState(false)
+    let handleViewOrder = async (orderId) => {
+        try {
+            let response = await GetOrderItemsApi(orderId, headers)
+            setOrderItems(response.data)
+            setViewOrderItems(!viewOrderItems)
+            console.log(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    let handleClose = () => {
+        setViewOrderItems(!viewOrderItems)
+    }
 
     return (
         <>
@@ -205,6 +254,66 @@ function ShopComponent() {
                     </table>
                 </form>
             </div>
+            <div className="list-orders">
+                {ordersData.map((order, index) => (
+                    <div className="order">
+                        <table>
+                            <tr>
+                                <td>Order Id: </td>
+                                <td>{order.id}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Price: </td>
+                                <td>{order.totalPrice}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Date: </td>
+                                <td>{order.date}</td>
+                            </tr>
+                            <tr>
+                                <td>Address: </td>
+                                <td>{order.deliveryAddress}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Status: </td>
+                                <td>{order.orderStatus}</td>
+                            </tr>
+                            <tr>
+                                <td>Update Status:</td>
+                                <td>
+                                    <select onChange={(event) => handleStatusChange(event)}>
+                                        <option value="">Select Status</option>
+                                        <option value="Order Placement">Order Placement</option>
+                                        <option value="Order Processing">Order Processing</option>
+                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                        <option value="Delivery Preparation">Delivery Preparation</option>
+                                        <option value="Shipping">Shipping</option>
+                                        <option value="Delivery">Delivery</option>
+                                        <option value="Successful Delivery">Successful Delivery</option>
+                                        <option value="Return">Return</option>
+                                        <option value="Canceled Order">Canceled Order</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        {!viewOrderItems && <div className="view-button"><button onClick={() => handleViewOrder(order.id)}>View</button></div>}
+                        {viewOrderItems &&
+                            <div className="orderItems">
+                                {
+                                    orderItems.map((orderItem) => (
+                                        <li>BookId: {orderItem.book.id} - Book Title: {orderItem.book.title} - Quantity: {orderItem.quantity}</li>
+                                    ))
+                                }
+                                <button onClick={handleClose}>Close</button>
+                            </div>
+
+                        }
+                        <div className="update-button"><button onClick={() => handleUpdateOrder(order.id)}>Update</button></div>
+                    </div>
+                ))
+                }
+            </div>
+
         </>
     )
 }

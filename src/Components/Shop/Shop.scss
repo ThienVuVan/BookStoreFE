@@ -76,6 +76,42 @@
             background-color: black;
         }
     }
+}
 
+.list-orders {
+    .order {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 5px;
+        padding: 10px;
 
+        table {
+            text-align: left;
+
+            td {
+                width: 150px;
+            }
+        }
+    }
+
+    .view-button {
+        text-align: left;
+    }
+
+    .update-button {
+        text-align: left;
+    }
+
+    .orderItems {
+        text-align: left;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    button {
+        padding: 0;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
 }

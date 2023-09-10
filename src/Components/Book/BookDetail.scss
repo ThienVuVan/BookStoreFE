@@ -60,6 +60,15 @@
     border-radius: 10px;
     text-align: left;
     margin: 5px;
+    padding: 5px;
+
+    table {
+        tr {
+            td {
+                width: 150px;
+            }
+        }
+    }
 }
 
 .comment {
@@ -79,6 +88,16 @@
         border-radius: 10px;
         margin: 10px;
         padding-left: 10px;
+
+        table {
+            .name {
+                width: 100px;
+            }
+
+            td {
+                width: 1000px;
+            }
+        }
     }
 
     .form {
