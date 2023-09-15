@@ -8,6 +8,8 @@ let apiClient = axios.create(
 
 // http://localhost:8080/api/v1/users/login
 export let LoginApi = (userCredential) => apiClient.post(`/api/v1/users/login`, userCredential);
+// http://localhost:8080/api/v1/social
+export let LoginSocialApi = (userCredential) => apiClient.post(`/api/v1/social`, userCredential);
 // http://localhost:8080/api/v1/users/signup
 export let SignupApi = (userCredential) => apiClient.post(`/api/v1/users/signup`, userCredential);
 // http://localhost:8080/api/v1/users

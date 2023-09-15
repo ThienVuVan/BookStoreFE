@@ -2,15 +2,20 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useAuth } from '../Sercutiry/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { LoginApi } from "../API/BookStoreApi";
+import { LoginApi, LoginSocialApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
+import { signInWithPopup } from "firebase/auth";
+import { auth, facebookProvider, googleProvider, githubProvider } from "../../Configuration/FirebaseConfig";
 import './Login.scss';
+
 
 
 function LoginComponent() {
     let Auth = useAuth();
     let navigate = useNavigate();
 
+    // login local
     let formik = useFormik({
         initialValues: {
             username: "",
@@ -38,41 +43,130 @@ function LoginComponent() {
         }
     })
 
+    // login google
+    const handleGoogleSignin = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(async (response) => {
+                var decoded = jwt_decode(response.user.accessToken);
+                try {
+                    let response = await LoginSocialApi({
+                        username: decoded.user_id,
+                        email: decoded.email,
+                        socialId: decoded.user_id,
+                        type: "0"
+                    })
+                    Auth.setAuthenticated(true)
+                    Auth.setRoles(response.data.roles);
+                    sessionStorage.setItem("userId", response.data.id);
+                    sessionStorage.setItem("username", response.data.username)
+                    sessionStorage.setItem("token", response.data.token)
+                    sessionStorage.setItem("refreshToken", response.data.refreshToken)
+                    toast.success("Login Success")
+                    navigate("/home")
+                }
+                catch (error) {
+                    toast.error("Login Failed")
+                    console.log(error)
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+
+    // login facebook;
+    const handleFacebookSignin = () => {
+        signInWithPopup(auth, facebookProvider)
+            .then(async (response) => {
+                var decoded = jwt_decode(response.user.accessToken);
+                try {
+                    let response = await LoginSocialApi({
+                        username: decoded.user_id,
+                        email: decoded.email,
+                        socialId: decoded.user_id,
+                        type: "1"
+                    })
+                    Auth.setAuthenticated(true)
+                    Auth.setRoles(response.data.roles);
+                    sessionStorage.setItem("userId", response.data.id);
+                    sessionStorage.setItem("username", response.data.username)
+                    sessionStorage.setItem("token", response.data.token)
+                    sessionStorage.setItem("refreshToken", response.data.refreshToken)
+                    toast.success("Login Success")
+                    navigate("/home")
+                }
+                catch (error) {
+                    toast.error("Login Failed")
+                    console.log(error)
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+
+    // login github
+
+    const handleGithubSignin = () => {
+        signInWithPopup(auth, githubProvider)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     return (
-        <div className="login">
-            <form className="form" onSubmit={formik.handleSubmit}>
-                <label>UserName</label>
-                <div>
-                    <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        value={formik.values.username}
-                        onChange={formik.handleChange}
-                        placeholder="Enter your username"
-                    />
-                    {formik.errors.username && (
-                        <p className="errorMsg"> {formik.errors.username} </p>
-                    )}
+        <div className="container">
+            <div className="login">
+                <div className="local">
+                    <form className="form" onSubmit={formik.handleSubmit}>
+                        <label>UserName</label>
+                        <div>
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                                placeholder="Enter your username"
+                            />
+                            {formik.errors.username && (
+                                <p className="errorMsg"> {formik.errors.username} </p>
+                            )}
+                        </div>
+                        <label>Password</label>
+                        <div>
+                            <input
+                                type="text"
+                                id="password"
+                                name="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                placeholder="Enter your password"
+                            />
+                            {formik.errors.password && (
+                                <p className="errorMsg"> {formik.errors.password} </p>
+                            )}
+                        </div>
+                        <div>
+                            <button className="button" type="submit"> Login </button>
+                        </div>
+                    </form>
                 </div>
-                <label>Password</label>
-                <div>
-                    <input
-                        type="text"
-                        id="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        placeholder="Enter your password"
-                    />
-                    {formik.errors.password && (
-                        <p className="errorMsg"> {formik.errors.password} </p>
-                    )}
+                <div className="google">
+                    <button onClick={handleGoogleSignin}>
+                        Sign in with Google
+                    </button>
                 </div>
-                <div>
-                    <button className="button" type="submit"> Login </button>
+                <div className="facebook">
+                    <button onClick={handleFacebookSignin}>
+                        Sign in with Facebook
+                    </button>
                 </div>
-            </form>
+                <div className="github">
+                    <button onClick={handleGithubSignin}>
+                        Sign in with Github
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

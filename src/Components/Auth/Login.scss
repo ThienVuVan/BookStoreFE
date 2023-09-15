@@ -1,12 +1,54 @@
-.login {
-    text-align: center;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 
-    .form {
-        .button {
-            margin: 5px;
-            border-radius: 5px;
-            color: aqua;
-            background-color: black;
+    .login {
+        width: 40%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+
+        .local {
+            .form {
+                .button {
+                    margin: 5px;
+                    border-radius: 5px;
+                    color: aqua;
+                    background-color: black;
+                }
+            }
+        }
+
+        .google {
+            margin-top: 20px;
+
+            button {
+                background-color: white;
+                border-radius: 5px;
+            }
+
+        }
+
+        .facebook {
+            margin-top: 20px;
+
+            button {
+                color: white;
+                background-color: rgb(77, 77, 248);
+                border-radius: 5px;
+            }
+        }
+
+        .github {
+            button {
+                background-color: white;
+                border-radius: 5px;
+            }
+
+            margin-top: 20px;
+
         }
     }
 }

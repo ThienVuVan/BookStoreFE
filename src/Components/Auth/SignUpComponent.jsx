@@ -42,7 +42,7 @@ function SignUpComponent() {
         }),
         onSubmit: async (values) => {
             try {
-                let response = await SignupApi(values)
+                await SignupApi(values)
                 toast.success("Register Success!")
                 navigate("/login")
             } catch (error) {
