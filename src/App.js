@@ -36,33 +36,27 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <HeaderComponent />
-          <div className='content'>
-            <SideBar className='sidebar' />
-            <main className='main-content'>
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/home' element={<Home />} />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
 
-                <Route path='/login' element={<LoginComponent />} />
-                <Route path='/signup' element={<SignUpComponent />} />
+            <Route path='/login' element={<LoginComponent />} />
+            <Route path='/signup' element={<SignUpComponent />} />
 
-                <Route path='/account' element={<AuthenticatedRoute><AccountComponent /></AuthenticatedRoute>} />
-                <Route path='/updateaccount' element={<AuthenticatedRoute><UpdateAccountComponent /></AuthenticatedRoute>} />
+            <Route path='/account' element={<AuthenticatedRoute><AccountComponent /></AuthenticatedRoute>} />
+            <Route path='/updateaccount' element={<AuthenticatedRoute><UpdateAccountComponent /></AuthenticatedRoute>} />
 
-                <Route path='/shop' element={<AuthenticatedRoute><ShopComponent /></AuthenticatedRoute>} />
-                <Route path='/createshop' element={<AuthenticatedRoute><CreateShopComponent /></AuthenticatedRoute>} />
-                <Route path='/updateshop' element={<AuthenticatedRoute><UpdateShopComponent /></AuthenticatedRoute>} />
-                <Route path='/updateshopdetail' element={<AuthenticatedRoute><UpdateShopDetailComponent /></AuthenticatedRoute>} />
+            <Route path='/shop' element={<AuthenticatedRoute><ShopComponent /></AuthenticatedRoute>} />
+            <Route path='/createshop' element={<AuthenticatedRoute><CreateShopComponent /></AuthenticatedRoute>} />
+            <Route path='/updateshop' element={<AuthenticatedRoute><UpdateShopComponent /></AuthenticatedRoute>} />
+            <Route path='/updateshopdetail' element={<AuthenticatedRoute><UpdateShopDetailComponent /></AuthenticatedRoute>} />
 
-                <Route path='/createbook' element={<AuthenticatedRoute><CreateBookComponent /></AuthenticatedRoute>} />
-                <Route path='/bookdetail/:id' element={<AuthenticatedRoute><BookDetailComponent /></AuthenticatedRoute>} />
-                <Route path='/updatebook/:id' element={<AuthenticatedRoute><UpdateBookComponent /></AuthenticatedRoute>} />
+            <Route path='/createbook' element={<AuthenticatedRoute><CreateBookComponent /></AuthenticatedRoute>} />
+            <Route path='/bookdetail/:id' element={<BookDetailComponent />} />
+            <Route path='/updatebook/:id' element={<AuthenticatedRoute><UpdateBookComponent /></AuthenticatedRoute>} />
 
-                <Route path='/cart' element={<AuthenticatedRoute><CartComponent /></AuthenticatedRoute>} />
-
-              </Routes>
-            </main>
-          </div>
+            <Route path='/cart' element={<AuthenticatedRoute><CartComponent /></AuthenticatedRoute>} />
+          </Routes>
           <ToastContainer
             position="top-right"
             autoClose={5000}

@@ -6,6 +6,19 @@ let apiClient = axios.create(
     }
 );
 
+// MODULE AUTH
+
+// MODULE USER
+
+// MODULE SHOP
+
+// MODULE BOOK
+
+// MODULE ORDER
+
+// MODULE CATEGORY
+
+
 // http://localhost:8080/api/v1/users/login
 export let LoginApi = (userCredential) => apiClient.post(`/api/v1/users/login`, userCredential);
 // http://localhost:8080/api/v1/social
@@ -61,6 +74,16 @@ export let GetOrderItemsApi = (orderId, headers) => apiClient.get(`/api/v1/order
 export let GetRateApi = (bookId, headers) => apiClient.get(`/api/v1/books/rates/count?bookId=${bookId}`, { headers });
 // http://localhost:8080/api/v1/orders
 export let UpdateOrderApi = (orderId, orderStatus, data, headers) => apiClient.put(`/api/v1/orders?orderId=${orderId}&orderStatus=${orderStatus}`, data, { headers });
+// http://localhost:8080/api/v1/categories
+export let GetCategoryApi = (headers) => apiClient.get(`/api/v1/categories`, { headers });
+// http://localhost:8080/api/v1/orders/confirm
+export let ConfirmOrderApi = (orderId, data, headers) => apiClient.put(`/api/v1/orders/confirm?orderId=${orderId}`, data, { headers });
+// http://localhost:8080/api/v1/orders
+export let DeleteOrderApi = (orderId, headers) => apiClient.delete(`/api/v1/orders?orderId=${orderId}`, { headers });
+// http://localhost:8080/api/v1/shops/bookId
+export let GetShopByBookIdApi = (bookId, headers) => apiClient.get(`/api/v1/shops/bookId?bookId=${bookId}`, { headers });
+
+
 
 
 

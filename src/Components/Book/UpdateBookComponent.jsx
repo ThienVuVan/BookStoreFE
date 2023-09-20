@@ -12,7 +12,10 @@ function UpdateBookComponent() {
     let Auth = useAuth()
     let Navigate = useNavigate()
     let [bookImages, setBookImages] = useState([])
-    const [categories, setCategories] = useState(Auth.categoriesData)
+    const [categories, setCategories] = useState(Auth.categories)
+    useEffect(() => {
+        setCategories(Auth.categories)
+    }, [Auth.categories])
     const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -92,118 +95,144 @@ function UpdateBookComponent() {
             <form onSubmit={formik.handleSubmit}>
                 <div className='book'>
                     <div className="image">
-                        <div>
-                            <ul>
-                                {bookImages.map((image) => {
-                                    return (
-                                        <li>Image: {image}</li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                        <div>
-                            <label>Select new images </label>
-                            <div><input type="file" name="image1" accept="image/*" onChange={handleImageChange} /></div>
-                            <div><input type="file" name="image2" accept="image/*" onChange={handleImageChange} /></div>
-                            <div><input type="file" name="image3" accept="image/*" onChange={handleImageChange} /></div>
-                        </div>
+                        <table>
+                            {bookImages.map((image) => {
+                                return (
+                                    <tr>Image: {image}</tr>
+                                )
+                            })}
+                            <tr>Select new images</tr>
+                            <tr><input type="file" name="image1" accept="image/*" onChange={handleImageChange} /></tr>
+                            <tr><input type="file" name="image2" accept="image/*" onChange={handleImageChange} /></tr>
+                            <tr><input type="file" name="image3" accept="image/*" onChange={handleImageChange} /></tr>
+                        </table>
                     </div>
                     <div className="info">
-                        <div>
-                            <label>Title: </label>
-                            <input type="text" name="title" value={formik.values.title}
-                                onChange={formik.handleChange}
-                            />
-                            {formik.errors.title && (
-                                <p className="errorMsg"> {formik.errors.title} </p>
-                            )}
-                        </div>
-                        <div>
-                            <label>price: </label>
-                            <input type="number" name="price" value={formik.values.price}
-                                onChange={formik.handleChange}
-                            />
-                            {formik.errors.price && (
-                                <p className="errorMsg"> {formik.errors.price} </p>
-                            )}
-                        </div>
-                        <div>
-                            <label>currentQuantity: </label>
-                            <input type="number" name="currentQuantity" value={formik.values.currentQuantity}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Authors </label>
-                            <input type="text" name="authors" value={formik.values.authors}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Category </label>
-                            <input type="text" name="author" value={formik.values.category}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>New Category</label>
-                            <select name="newCategoryId" value={formik.values.newCategoryId} onChange={formik.handleChange}>
-                                <option value="">none</option>
-                                {categories.map((category) => {
-                                    return (
-                                        category.subcategories.map((subcategory) => (
-                                            <option value={subcategory.id}>{subcategory.name}</option>
-                                        ))
-                                    )
-                                })
-                                }
-                            </select>
-                        </div>
+                        <table>
+                            <tr>
+                                <td>Title:</td>
+                                <td>
+                                    <input type="text" name="title" value={formik.values.title}
+                                        onChange={formik.handleChange}
+                                    />
+                                    {formik.errors.title && (
+                                        <p className="errorMsg"> {formik.errors.title} </p>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td>
+                                    <input type="number" name="price" value={formik.values.price}
+                                        onChange={formik.handleChange}
+                                    />
+                                    {formik.errors.price && (
+                                        <p className="errorMsg"> {formik.errors.price} </p>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CurrentQuantity:</td>
+                                <td>
+                                    <input type="number" name="currentQuantity" value={formik.values.currentQuantity}
+                                        onChange={formik.handleChange}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Authors:</td>
+                                <td>
+                                    <input type="text" name="authors" value={formik.values.authors}
+                                        onChange={formik.handleChange}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category:</td>
+                                <td>
+                                    <input type="text" name="author" value={formik.values.category}
+                                        onChange={formik.handleChange}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>New Category:</td>
+                                <td>
+                                    <select name="newCategoryId" value={formik.values.newCategoryId} onChange={formik.handleChange}>
+                                        <option value="">none</option>
+                                        {categories.map((category) => {
+                                            return (
+                                                category.subcategories.map((subcategory) => (
+                                                    <option value={subcategory.id}>{subcategory.name}</option>
+                                                ))
+                                            )
+                                        })
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div className='book-detail'>
-                    <div>
-                        <label>publisher: </label>
-                        <input type="text" name="publisher" value={formik.values.publisher}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>publicationDate: </label>
-                        <input type="date" name="publicationDate" value={formik.values.publicationDate}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>dimension: </label>
-                        <input type="text" name="dimension" value={formik.values.dimension}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>coverType: </label>
-                        <input type="text" name="coverType" value={formik.values.coverType}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>numberOfPages: </label>
-                        <input type="number" name="numberOfPages" value={formik.values.numberOfPages}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>publishingHouse: </label>
-                        <input type="text" name="publishingHouse" value={formik.values.publishingHouse}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>description: </label>
-                        <input type="text" name="description" value={formik.values.description}
-                            onChange={formik.handleChange}
-                        />
-                    </div>
+                    <table>
+                        <tr>
+                            <td>Publisher:</td>
+                            <td>
+                                <input type="text" name="publisher" value={formik.values.publisher}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PublicationDate:</td>
+                            <td>
+                                <input type="date" name="publicationDate" value={formik.values.publicationDate}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dimension:</td>
+                            <td>
+                                <input type="text" name="dimension" value={formik.values.dimension}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CoverType:</td>
+                            <td>
+                                <input type="text" name="coverType" value={formik.values.coverType}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NumberOfPages:</td>
+                            <td>
+                                <input type="number" name="numberOfPages" value={formik.values.numberOfPages}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PublishingHouse:</td>
+                            <td>
+                                <input type="text" name="publishingHouse" value={formik.values.publishingHouse}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>
+                                <input type="text" name="description" value={formik.values.description}
+                                    onChange={formik.handleChange}
+                                />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div className='setting'>
                     <button type="submit"> Update Book </button>

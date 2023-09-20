@@ -283,14 +283,8 @@ function ShopComponent() {
                                 <td>
                                     <select onChange={(event) => handleStatusChange(event)}>
                                         <option value="">Select Status</option>
-                                        <option value="Order Placement">Order Placement</option>
                                         <option value="Order Processing">Order Processing</option>
                                         <option value="Order Fulfillment">Order Fulfillment</option>
-                                        <option value="Delivery Preparation">Delivery Preparation</option>
-                                        <option value="Shipping">Shipping</option>
-                                        <option value="Delivery">Delivery</option>
-                                        <option value="Successful Delivery">Successful Delivery</option>
-                                        <option value="Return">Return</option>
                                         <option value="Canceled Order">Canceled Order</option>
                                     </select>
                                 </td>

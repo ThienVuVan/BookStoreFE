@@ -1,4 +1,4 @@
-import { GetUserById, GetOrderForUserApi, GetOrderItemsApi, CreateReviewApi } from '../API/BookStoreApi';
+import { GetUserById, GetOrderForUserApi, GetOrderItemsApi, CreateReviewApi, ConfirmOrderApi, DeleteOrderApi } from '../API/BookStoreApi';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Sercutiry/AuthContext';
@@ -13,9 +13,9 @@ function AccountComponent() {
     let [createShop, setCreateShop] = useState(false);
     let [userData, setUserData] = useState({});
     let [ordersData, setOrdersData] = useState([]);
+    let [change, setChange] = useState(false)
     const headers = {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
     }
 
@@ -30,7 +30,7 @@ function AccountComponent() {
         }
     }
 
-    useEffect(() => { retrieveUser() }, []);
+    useEffect(() => { retrieveUser() }, [change]);
 
     let handleCreateShop = () => {
         Navigate("/createshop");
@@ -46,12 +46,14 @@ function AccountComponent() {
     let [orderItems, setOrderItems] = useState([])
     let [evaluate, setEvaluate] = useState(false)
     let [confirm, setConfirm] = useState(true)
+    let [orderId, setOrderId] = useState(null)
 
     let handleEvaluate = async (orderId) => {
         try {
             let response = await GetOrderItemsApi(orderId, headers)
             console.log(response.data)
             setOrderItems(response.data)
+            setOrderId(orderId)
             setEvaluate(true)
         }
         catch (error) {
@@ -60,6 +62,7 @@ function AccountComponent() {
     }
     let comment = useFormik({
         initialValues: {
+            orderId: orderId,
             userId: sessionStorage.getItem("userId"),
             bookId: null,
             comment: "",
@@ -70,14 +73,16 @@ function AccountComponent() {
             comment: Yup.string().required("Required")
         }),
         onSubmit: async (values) => {
+            values.orderId = orderId;
             const headers1 = {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
             }
-            console.log(values)
             try {
                 await CreateReviewApi(values, headers1)
                 toast.success("Create Comment Success!")
+                setEvaluate(false)
+                setChange(!change)
             }
             catch (error) {
                 console.log(error)
@@ -97,6 +102,29 @@ function AccountComponent() {
         setConfirm(!confirm)
     }
 
+    let handleConfirmSuccess = async (orderId) => {
+        try {
+            await ConfirmOrderApi(orderId, null, headers)
+            toast.success("Confirm Success!")
+            setChange(!change)
+        }
+        catch (error) {
+            toast.error("Confirm failed!")
+            console.log(error)
+        }
+    }
+
+    let hanleCancelOrder = async (orderId) => {
+        try {
+            await DeleteOrderApi(orderId, headers)
+            toast.success("Delete Order Success!")
+            setChange(!change)
+        }
+        catch (error) {
+            toast.error("Delete Order Failed!")
+            console.log(error)
+        }
+    }
     return (
         <>
             <div className='account'>
@@ -118,14 +146,55 @@ function AccountComponent() {
                 <span className='orders-label'>Your Orders</span>
                 {ordersData.map((order) => (
                     <div className='order'>
-                        <li>OrderId: {order.id}</li>
-                        <li>Order Price: {order.totalPrice}</li>
-                        <li>Order Date: {order.date}</li>
-                        <li>Order Address: {order.deliveryAddress}</li>
-                        <li>Order Status: {order.orderStatus}</li>
-                        {order.orderStatus === "Successful Delivery" &&
-                            <li><button onClick={() => handleEvaluate(order.id)}>evaluate</button></li>
-                        }
+                        <table>
+                            <tr>
+                                <td>OrderId:</td>
+                                <td>{order.id}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Price:</td>
+                                <td>{order.totalPrice}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Date:</td>
+                                <td>{order.date}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Address:</td>
+                                <td>{order.deliveryAddress}</td>
+                            </tr>
+                            <tr>
+                                <td>Order Status:</td>
+                                <td>{order.orderStatus}</td>
+                            </tr>
+                            <tr>
+                                <td>Is-Confirm:</td>
+                                {order.isConfirm && <td>Confirm Successful</td>}
+                                {!order.isConfirm && <td>Non Confirm</td>}
+                            </tr>
+                            <tr>
+                                <td>Is-Evaluate:</td>
+                                {order.isEvaluate && <td>Evaluate Successful</td>}
+                                {!order.isEvaluate && <td>Non Evaluate</td>}
+                            </tr>
+                            <tr>
+                                {(order.orderStatus === "Successful Delivery" && order.isConfirm === false) &&
+                                    <button onClick={() => handleConfirmSuccess(order.id)}>Confirm Success</button>}
+                            </tr>
+                            <tr>
+                                {(order.orderStatus === "Successful Delivery" && order.isEvaluate === false && order.isConfirm === true) &&
+                                    <button onClick={() => handleEvaluate(order.id)}>Evaluate</button>
+                                }
+                            </tr>
+                            <tr>
+                                {(order.orderStatus === "Order Placement" || order.orderStatus === "Order Processing"
+                                    || order.orderStatus === "Order Fulfillment" || order.orderStatus === "Delivery Preparation")
+                                    &&
+                                    <button onClick={() => hanleCancelOrder(order.id)}>Cancel Order</button>
+                                }
+                            </tr>
+
+                        </table>
                     </div>
                 ))
                 }

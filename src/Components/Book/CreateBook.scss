@@ -2,36 +2,18 @@
     border-bottom: 1px solid #ccc;
     display: flex;
     text-align: left;
+    padding: 10px;
 
     .info {
-        width: 35%;
-        border-right: 1px solid #ccc;
+        width: 50%;
     }
 
     .detail {
-        width: 35%;
-        border-right: 1px solid #ccc;
-    }
-
-    .other {
-        width: 30%;
-        border-right: 1px solid #ccc;
-    }
-
-    .subcategory {
-        color: cadetblue;
-        text-decoration: none;
-        list-style: none;
-        cursor: pointer;
-
-        &:hover {
-            color: black;
-        }
+        width: 50%;
     }
 }
 
 .setting {
-
     button {
         margin-top: 10px;
         border-radius: 5px;

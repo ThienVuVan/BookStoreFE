@@ -1,44 +1,31 @@
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext, useState, useEffect } from "react";
+import { GetCategoryApi } from "../API/BookStoreApi";
 // create context
 export let AuthContext = createContext();
 // get context to use
 export let useAuth = () => useContext(AuthContext);
-// data
-const categoriesData = [
-    {
-        id: 1,
-        title: 'Arts & Photography',
-        isOpen: false,
-        subcategories: [
-            { id: 2, name: 'Fashion', parentId: 1 },
-            { id: 3, name: 'Graphic Design', parentId: 1 },
-        ]
-    },
-    {
-        id: 4,
-        title: 'Business & Money',
-        isOpen: false,
-        subcategories: [
-            { id: 5, name: 'Economics', parentId: 4 },
-            { id: 6, name: 'Investing', parentId: 4 },
-        ]
-    },
-    {
-        id: 7,
-        title: 'Humor & Entertainment',
-        isOpen: false,
-        subcategories: [
-            { id: 8, name: 'Humor', parentId: 7 },
-            { id: 9, name: 'Puzzles & Games', parentId: 7 },
-        ]
-    },
-];
 
 // share context with other component
 function AuthProvider({ children }) {
     let [isAuthenticated, setAuthenticated] = useState(false);
     let [roles, setRoles] = useState([]);
+    let [categories, setCategories] = useState([])
+    const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+    }
+    let retrieveCategory = async () => {
+        try {
+            let response = await GetCategoryApi(headers)
+            setCategories(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        retrieveCategory()
+    }, [])
 
     // handle logout
     let logout = () => {
@@ -50,7 +37,7 @@ function AuthProvider({ children }) {
     return (
         // set things in to context
         <AuthContext.Provider value={{
-            isAuthenticated, roles, categoriesData,
+            isAuthenticated, roles, categories,
             logout, setAuthenticated, setRoles
         }}>
             {children}

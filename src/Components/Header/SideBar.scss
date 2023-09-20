@@ -1,24 +1,33 @@
 .sidebar {
-    background-color: hsl(0, 5%, 75%);
     color: black;
     overflow-y: auto;
-}
+    border-right: 2px solid #ccc;
 
-.category {
-    margin-bottom: 10px;
+    .category {
+        margin-bottom: 10px;
 
-    .category-title {
-        cursor: pointer;
-        font-weight: bold;
-    }
+        .category-title {
+            cursor: pointer;
+            font-weight: bold;
 
-    .subcategory-list {
-        list-style: none;
-        padding-left: 15px;
-    }
+            &:hover {
+                color: orangered;
+            }
+        }
 
-    .subcategory {
-        margin: 5px 0;
-        cursor: pointer;
+        .subcategory-list {
+            list-style: none;
+            padding-left: 15px;
+        }
+
+        .subcategory {
+            margin: 5px 0;
+            cursor: pointer;
+
+            &:hover {
+                color: orangered;
+            }
+        }
+
     }
 }

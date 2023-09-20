@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UpdateShopDetailApi, GetShopDetailApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
 import { useEffect } from 'react';
+import './UpdateShopDetail.scss';
 
 function UpdateShopDetailComponent() {
     let Navigate = useNavigate();
@@ -51,37 +52,47 @@ function UpdateShopDetailComponent() {
     }, [])
 
     return (
-        <div>
-            <form className="infoform" onSubmit={formik.handleSubmit}>
-                <div>
-                    <label>description: </label>
-                    <input type="text" name="description"
-                        value={formik.values.description}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>operationHours: </label>
-                    <input type="text" name="operationHours"
-                        value={formik.values.operationHours}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>shippingPolicy: </label>
-                    <input type="text" name="shippingPolicy"
-                        value={formik.values.shippingPolicy}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>returnPolicy: </label>
-                    <input type="text" name="returnPolicy"
-                        value={formik.values.returnPolicy}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div> <button type="submit"> Update Shop </button> </div>
+        <div className="info-shopdetail">
+            <form onSubmit={formik.handleSubmit}>
+                <table>
+                    <tr>
+                        <td>Description:</td>
+                        <td>
+                            <input type="text" name="description"
+                                value={formik.values.description}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OperationHours:</td>
+                        <td>
+                            <input type="text" name="operationHours"
+                                value={formik.values.operationHours}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ShippingPolicy:</td>
+                        <td>
+                            <input type="text" name="shippingPolicy"
+                                value={formik.values.shippingPolicy}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ReturnPolicy:</td>
+                        <td>
+                            <input type="text" name="returnPolicy"
+                                value={formik.values.returnPolicy}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr><button type="submit"> Update Shop </button> </tr>
+                </table>
             </form>
         </div>
     )

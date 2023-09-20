@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './SideBar.scss';
 import { useAuth } from '../Sercutiry/AuthContext';
+import { useEffect } from 'react';
 
 const SideBar = () => {
-    let Auth = useAuth();
-    const [categories, setCategories] = useState(Auth.categoriesData);
+    let Auth = useAuth()
+    const [categories, setCategories] = useState(Auth.categories);
+    useEffect(() => {
+        setCategories(Auth.categories)
+    }, [Auth.categories])
     const toggleSubcategories = (categoryId) => {
         // Tạo một mảng mới của danh mục với trạng thái đã được cập nhật
         const updatedCategories = categories.map((category) => {
@@ -26,6 +30,10 @@ const SideBar = () => {
         setCategories(updatedCategories);
     };
 
+    let handleSelectCategory = (categoryId) => {
+        console.log(categoryId)
+    }
+
     return (
         <div className="sidebar">
             {categories.map((category) => (
@@ -34,15 +42,12 @@ const SideBar = () => {
                         className="category-title"
                         onClick={() => toggleSubcategories(category.id)}
                     >
-                        {category.title}
+                        {category.name}
                     </div>
                     {category.isOpen && (
                         <ul className="subcategory-list">
-                            {category.subcategories.map((subcategory, index) => (
-                                <li key={index} className="subcategory">
-                                    {console.log(index)}
-                                    {subcategory.name}
-                                </li>
+                            {category.subcategories.map((subcategory) => (
+                                <li className="subcategory" onClick={() => handleSelectCategory(subcategory.id)}>{subcategory.name}</li>
                             ))}
                         </ul>
                     )}

@@ -1,10 +1,9 @@
 .book {
     display: flex;
     text-align: left;
-    font-weight: bold;
 
     .image {
-        border: 1px solid #ccc;
+        border: 2px solid #ccc;
         border-radius: 10px;
         width: 65%;
         margin: 5px;
@@ -15,11 +14,12 @@
             margin: 10px;
             margin-top: 20px;
             border-radius: 5px;
+            border: 2px solid orangered;
         }
     }
 
     .info {
-        border: 1px solid #ccc;
+        border: 2px solid #ccc;
         border-radius: 10px;
         width: 35%;
         margin: 5px;
@@ -28,12 +28,10 @@
             border-radius: 5px;
             color: aqua;
             background-color: black;
-            margin-right: 10px;
-            margin-top: 10px;
         }
 
         span {
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
             border-radius: 10px;
             margin: 10px;
             font-size: 20px;
@@ -46,17 +44,68 @@
     }
 }
 
-.book-detail {
-    font-weight: bold;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    text-align: left;
-    margin: 5px;
+.more {
+    display: flex;
+
+    .book-detail {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        text-align: left;
+        margin: 5px;
+        width: 65%;
+    }
+
+    .shop {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        text-align: left;
+        margin: 5px;
+        width: 35%;
+        display: flex;
+
+        .shop-image {
+            width: 35%;
+            display: flex;
+            justify-content: center;
+
+            img {
+                margin-top: 50px;
+                height: 100px;
+                border-radius: 5px;
+                border: 1px solid orangered;
+            }
+        }
+
+        .shop-info {
+            width: 65%;
+
+            .detail {
+                margin-top: 50px;
+                padding-left: 5px;
+
+                .name {
+                    font-size: larger;
+                }
+
+                .address {
+                    font-weight: bolder;
+                }
+            }
+
+            button {
+                border-radius: 5px;
+                color: aqua;
+                background-color: black;
+            }
+        }
+
+    }
 }
 
+
+
 .rate {
-    font-weight: bold;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 10px;
     text-align: left;
     margin: 5px;
@@ -72,8 +121,7 @@
 }
 
 .comment {
-    font-weight: bold;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 10px;
     text-align: left;
     margin: 5px;

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UpdateShopApi, GetShopApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
 import { useEffect } from 'react';
+import "./UpdateShop.scss"
 
 function UpdateShopComponent() {
     let Navigate = useNavigate();
@@ -63,49 +64,61 @@ function UpdateShopComponent() {
     }
 
     return (
-        <div>
-            <form className="infoform" onSubmit={formik.handleSubmit}>
-                <div>
-                    <label>ShopName: </label>
-                    <input type="text" name="shopName"
-                        value={formik.values.shopName}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.username && (
-                        <p className="errorMsg"> {formik.errors.username} </p>
-                    )}
-                </div>
-                <div>
-                    <label>NewShopLogo: </label>
-                    <input type="file" name="shopLogo"
-                        onChange={handleChangeShopLogo}
-                    />
-                </div>
-                <div>
-                    <label>ShopAddress: </label>
-                    <input type="text" name="shopAddress"
-                        value={formik.values.shopAddress}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>ContactPhone: </label>
-                    <input type="text" name="contactPhone"
-                        value={formik.values.contactPhone}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.contactPhone && (
-                        <p className="errorMsg"> {formik.errors.contactPhone} </p>
-                    )}
-                </div>
-                <div>
-                    <label>ContactEmail: </label>
-                    <input type="text" name="contactEmail"
-                        value={formik.values.contactEmail}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div> <button type="submit"> Update Shop </button> </div>
+        <div className="info-shop">
+            <form onSubmit={formik.handleSubmit}>
+                <table>
+                    <tr>
+                        <td>ShopName:</td>
+                        <td>
+                            <input type="text" name="shopName"
+                                value={formik.values.shopName}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.errors.username && (
+                                <p className="errorMsg"> {formik.errors.username} </p>
+                            )}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>NewShopLogo:</td>
+                        <td>
+                            <input type="file" name="shopLogo"
+                                onChange={handleChangeShopLogo}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ShopAddress:</td>
+                        <td>
+                            <input type="text" name="shopAddress"
+                                value={formik.values.shopAddress}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ContactPhone:</td>
+                        <td>
+                            <input type="text" name="contactPhone"
+                                value={formik.values.contactPhone}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.errors.contactPhone && (
+                                <p className="errorMsg"> {formik.errors.contactPhone} </p>
+                            )}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ContactEmail:</td>
+                        <td>
+                            <input type="text" name="contactEmail"
+                                value={formik.values.contactEmail}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr className="button"><button type="submit"> Update Shop </button></tr>
+                </table>
             </form>
         </div>
     )

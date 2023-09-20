@@ -31,7 +31,10 @@ function Home() {
 
     // filer book
     let Auth = useAuth();
-    const [categories, setCategories] = useState(Auth.categoriesData);
+    const [categories, setCategories] = useState(Auth.categories);
+    useEffect(() => {
+        setCategories(Auth.categories)
+    }, [Auth.categories])
     let filter = useFormik({
         initialValues: {
             title: null,
@@ -54,6 +57,17 @@ function Home() {
             }
         }
     })
+
+    // change page
+    let handleChangePage = async (page) => {
+        try {
+            let response = await GetBookByPageApi(page, headers)
+            setBookData(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className='home'>
@@ -89,13 +103,20 @@ function Home() {
                             <img className='image-item' src={book.imagePath.substring(30)} />
                         </div>
                         <div className='info'>
-                            <div>{book.title}</div>
-                            <div>Price: {book.price} $</div>
-                            <div>Sold: {book.soldQuantity}</div>
+                            <div className='title'>{book.title}</div>
+                            <div className='price'>{book.price} $</div>
+                            <div className='sold'>Sold: {book.soldQuantity}</div>
                         </div>
                     </div>
                 ))
                 }
+            </div>
+            <div className='page'>
+                <li onClick={() => handleChangePage(0)}>1</li>
+                <li onClick={() => handleChangePage(1)}>2</li>
+                <li onClick={() => handleChangePage(2)}>3</li>
+                <li onClick={() => handleChangePage(3)}>4</li>
+                <li className='more'>...</li>
             </div>
         </div>
     )

@@ -60,30 +60,38 @@ function UpdateAccountComponent() {
     return (
         <div className='update-account'>
             <form onSubmit={formik.handleSubmit}>
-                <div>
-                    <label>UserName: </label>
-                    <input type="text" name="username"
-                        value={formik.values.username}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>Email: </label>
-                    <input type="text" name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <label>PhoneNumber: </label>
-                    <input type="text" name="phoneNumber"
-                        value={formik.values.phoneNumber}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div>
-                    <button type="submit"> Save Update </button>
-                </div>
+                <table>
+                    <tr>
+                        <td>UserName:</td>
+                        <td>
+                            <input type="text" name="username"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>
+                            <input type="text" name="email"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PhoneNumber:</td>
+                        <td>
+                            <input type="text" name="phoneNumber"
+                                value={formik.values.phoneNumber}
+                                onChange={formik.handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <button type="submit"> Save Update </button>
+                    </tr>
+                </table>
             </form>
         </div>
     )
