@@ -1,5 +1,6 @@
 .cart {
     display: flex;
+    padding: 10px;
 
     .cart-item-container {
         width: 85%;
@@ -7,43 +8,73 @@
         .cart-item {
             border: 1px solid #ccc;
             border-radius: 10px;
-            margin: 5px;
             text-align: left;
             display: flex;
-            font-weight: bold;
-            font-size: 20px;
+            margin: 5px;
 
-            div {
-                width: 25%;
-                display: grid;
-                align-items: center;
+            button {
+                border-radius: 5px;
+                border: 1px solid rgb(167, 81, 50);
+                color: white;
+                background-color: rgb(248, 97, 42);
 
-                button {
-                    width: fit-content;
-                    border-radius: 5px;
-                    color: aqua;
-                    background-color: black;
+                &:hover {
+                    background-color: rgb(167, 81, 50);
                 }
             }
 
-            img {
-                border-radius: 10px;
-                margin-right: 30px;
-                width: 100px;
-                height: 100px;
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
 
+            .image {
+                width: 20%;
+
+                img {
+                    border-radius: 10px;
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+
+            .title {
+                width: 30%;
+                font-size: larger;
+
+            }
+
+            .price {
+                width: 10%;
+                font-size: large;
+                color: red;
             }
 
             .number {
-                display: flex;
+                width: 10%;
 
-                span {
-                    margin: 10px;
-                    border: 1px solid #ccc;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    color: orangered;
+                .number-list {
+                    display: flex;
+                    flex-direction: row;
+
+                    li {
+                        text-align: center;
+                        list-style: none;
+                        border: 1px solid #ccc;
+                        width: 25px;
+                        height: 25px;
+                        cursor: pointer;
+                    }
                 }
+            }
+
+            .check {
+                width: 10%;
+            }
+
+            .delete {
+                width: 10%;
             }
         }
     }
@@ -53,20 +84,26 @@
         border: 1px solid #ccc;
         border-radius: 10px;
         margin: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         button {
             border-radius: 5px;
-            color: aqua;
-            background-color: black;
-            margin-top: 50%;
+            border: 1px solid rgb(167, 81, 50);
+            color: white;
+            background-color: rgb(248, 97, 42);
+            width: fit-content;
+
+            &:hover {
+                background-color: rgb(167, 81, 50);
+            }
         }
     }
 
 }
 
 .bill {
-    padding: 5px;
-
     .bill-item {
         text-align: left;
         border: 1px solid #ccc;
@@ -83,7 +120,13 @@
 
     button {
         border-radius: 5px;
-        color: aqua;
-        background-color: black;
+        border: 1px solid rgb(167, 81, 50);
+        color: white;
+        background-color: rgb(248, 97, 42);
+        width: fit-content;
+
+        &:hover {
+            background-color: rgb(167, 81, 50);
+        }
     }
 }

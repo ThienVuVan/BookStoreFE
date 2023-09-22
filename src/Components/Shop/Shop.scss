@@ -14,17 +14,17 @@
     }
 
     .setting {
-        text-align: left;
         width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-        div {
-            margin: 5px;
-
-            button {
-                border-radius: 5px;
-                color: aqua;
-                background-color: black;
-            }
+        button {
+            border-radius: 5px;
+            color: aqua;
+            background-color: black;
+            width: fit-content;
+            margin-left: 20%;
         }
     }
 }

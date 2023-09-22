@@ -14,18 +14,18 @@ import UpdateShopComponent from './Components/Shop/UpdateShopComponent';
 import AccountComponent from './Components/Account/AccountComponent';
 import UpdateAccountComponent from './Components/Account/UpdateAccountComponent';
 import UpdateShopDetailComponent from './Components/Shop/UpdateShopDetailComponent';
-import SideBar from './Components/Header/SideBar';
 import CreateBookComponent from './Components/Book/CreateBookComponent';
 import BookDetailComponent from './Components/Book/BookDetailComponent';
 import UpdateBookComponent from './Components/Book/UpdateBookComponent';
 import CartComponent from './Components/Cart/CartComponent';
+import ViewShopComponent from './Components/Shop/ViewShopComponent';
 
 function AuthenticatedRoute({ children }) {
   let Auth = useAuth();
   if (Auth.isAuthenticated) {
     return children;
   } else {
-    return <Navigate to="/login" />
+    return <Navigate to="/" />
   }
 }
 
@@ -50,6 +50,8 @@ function App() {
             <Route path='/createshop' element={<AuthenticatedRoute><CreateShopComponent /></AuthenticatedRoute>} />
             <Route path='/updateshop' element={<AuthenticatedRoute><UpdateShopComponent /></AuthenticatedRoute>} />
             <Route path='/updateshopdetail' element={<AuthenticatedRoute><UpdateShopDetailComponent /></AuthenticatedRoute>} />
+            <Route path='/viewshopdetail/:shopId' element={<ViewShopComponent />} />
+
 
             <Route path='/createbook' element={<AuthenticatedRoute><CreateBookComponent /></AuthenticatedRoute>} />
             <Route path='/bookdetail/:id' element={<BookDetailComponent />} />

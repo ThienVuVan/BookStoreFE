@@ -1,28 +1,31 @@
 .account {
     display: flex;
     border-bottom: 1px solid #ccc;
-    font-weight: bold;
 
     .info {
-        text-align: left;
         width: 80%;
         border-right: 1px solid #ccc;
+        padding: 10px;
 
-        li {
-            list-style: none;
+        table {
+            text-align: left;
         }
     }
 
     .setting {
         width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-        div {
-            margin: 5px;
+        button {
+            color: azure;
+            border-width: 0;
+            border-radius: 5px;
+            background-color: rgb(245, 101, 48);
 
-            button {
-                border-radius: 5px;
-                color: aqua;
-                background-color: black;
+            &:hover {
+                background-color: rgb(134, 224, 194);
             }
         }
     }
@@ -30,7 +33,6 @@
 
 .orders {
     text-align: left;
-    font-weight: bold;
 
     .orders-label {
         margin: 5px;

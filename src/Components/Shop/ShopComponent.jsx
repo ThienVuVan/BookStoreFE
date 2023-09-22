@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import './Shop.scss';
 import { useFormik } from "formik";
-import { date } from "yup";
 
 function ShopComponent() {
     let Auth = useAuth();
@@ -36,6 +35,7 @@ function ShopComponent() {
         try {
             let response = await GetBookForShopApi(sessionStorage.getItem("shopId"), headers)
             setBookData(response.data)
+            console.log(response.data)
         }
         catch (error) {
             console.log(error)
@@ -63,6 +63,7 @@ function ShopComponent() {
         try {
             let response = await DeleteShopApi(sessionStorage.getItem("userId"), sessionStorage.getItem("shopId"), headers);
             Auth.setRoles(response.data);
+            localStorage.setItem("roles", JSON.stringify(response.data))
             toast.success("Delete Shop Success!")
             Navigate("/account")
         }
@@ -176,10 +177,10 @@ function ShopComponent() {
                     </ul>``
                 </div>
                 <div className="setting">
-                    <div><button onClick={handleUpdateShop}>Update Shop</button></div>
-                    <div><button onClick={handleUpdateShopDetail}>Update ShopDetail</button></div>
-                    <div><button onClick={handleDeleteShop}>Delete Shop</button></div>
-                    <div><button onClick={handleAddBook}>Add New Book</button></div>
+                    <button onClick={handleUpdateShop}>Update Shop</button>
+                    <button onClick={handleUpdateShopDetail}>Update ShopDetail</button>
+                    <button onClick={handleDeleteShop}>Delete Shop</button>
+                    <button onClick={handleAddBook}>Add New Book</button>
                 </div>
             </div>
             <div className="list-book">
@@ -286,6 +287,7 @@ function ShopComponent() {
                                         <option value="Order Processing">Order Processing</option>
                                         <option value="Order Fulfillment">Order Fulfillment</option>
                                         <option value="Canceled Order">Canceled Order</option>
+                                        <option value="Successful Delivery">Successful Delivery</option>
                                     </select>
                                 </td>
                             </tr>
@@ -302,7 +304,11 @@ function ShopComponent() {
                             </div>
 
                         }
-                        <div className="update-button"><button onClick={() => handleUpdateOrder(order.id)}>Update</button></div>
+                        {
+                            (order.orderStatus !== "Successful Delivery" && order.orderStatus !== "Canceled Order")
+                            && <div className="update-button"><button onClick={() => handleUpdateOrder(order.id)}>Update</button></div>
+                        }
+
                     </div>
                 ))
                 }

@@ -1,4 +1,32 @@
-.home-list-book {
+.info-shop {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: left;
+    margin: 10px;
+    padding: 10px;
+
+    .image-shop {
+        img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+        }
+    }
+
+    .detail {
+        padding-left: 10px;
+    }
+}
+
+.label {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    padding: 10px;
+}
+
+.books {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -61,73 +89,5 @@
                 font-weight: 500;
             }
         }
-    }
-}
-
-.filter {
-    text-align: left;
-    display: flex;
-    justify-content: center;
-    background-color: #ebe7e7;
-    border-radius: 5px;
-    border: 1px solid rgb(245, 101, 48);
-    margin: 10px 20px;
-    position: sticky;
-    z-index: 1;
-
-    font-family: Georgia;
-
-    .form {
-        margin: 10px;
-
-        .price {
-            width: 60px;
-        }
-
-        input {
-            margin: 0 10px;
-            border-radius: 5px;
-            border: 1px groove rgb(245, 101, 48);
-        }
-
-        select {
-            margin: 0 10px;
-            border-radius: 5px;
-            border: 1px groove rgb(245, 101, 48);
-            height: 28px;
-        }
-
-        label {
-            font-weight: 2px;
-        }
-
-        button {
-            color: azure;
-            border-width: 0;
-            border-radius: 5px;
-            background-color: rgb(245, 101, 48);
-
-            &:hover {
-                background-color: rgb(134, 224, 194);
-            }
-        }
-    }
-}
-
-.page {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-
-    li {
-        cursor: pointer;
-        text-decoration: underline;
-        list-style: none;
-        margin: 5px;
-        color: orangered;
-    }
-
-    .more {
-        text-decoration: none;
     }
 }

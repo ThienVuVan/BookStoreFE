@@ -175,18 +175,20 @@ function CartComponent() {
                     {
                         cartData.map((item, index) => (
                             <div key={index} className="cart-item">
-                                <div><img src={item.imagePath.substring(30)} /></div>
-                                <div>{item.title}</div>
-                                <div>{item.price} $</div>
+                                <div className="image"><img src={item.imagePath.substring(30)} /></div>
+                                <div className="title">{item.title}</div>
+                                <div className="price">{item.price} $</div>
                                 <div className="number">
-                                    <span onClick={() => handleMinusBookNumber(index)}>-</span>
-                                    <span >{CartList[index].bookNumber}</span>
-                                    <span onClick={() => handlePlusBookNumber(index)}>+</span>
+                                    <div className="number-list">
+                                        <li onClick={() => handleMinusBookNumber(index)}>-</li>
+                                        <li>{CartList[index].bookNumber}</li>
+                                        <li onClick={() => handlePlusBookNumber(index)}>+</li>
+                                    </div>
                                 </div>
-                                <div>
+                                <div className="check">
                                     <input type="checkbox" onChange={(event) => handleSelect(event, index)}></input>
                                 </div>
-                                <div>
+                                <div className="delete">
                                     <button onClick={() => handleDelele(index)}>Delete</button>
                                 </div>
                             </div>
@@ -194,7 +196,9 @@ function CartComponent() {
                     }
                 </div>
                 <div className="control">
-                    <button onClick={handleBuy}>Buy Selected</button>
+                    <div>
+                        <button onClick={handleBuy}>Buy Selected</button>
+                    </div>
                 </div>
             </div>
             {buy &&
@@ -210,12 +214,26 @@ function CartComponent() {
                                 }
                                 <div>Total Price: {order.totalPrice}</div>
                                 <div>Shop: {order.shopName}</div>
-                                <div>Address</div>
-                                <div><input type="text" onChange={(event) => handleAddress(event, index)}></input></div>
-                                <div>PhoneNumber</div>
-                                <div><input type="text" onChange={(event) => handlePhoneNumber(event, index)}></input></div>
-                                <div>Payment Type</div>
-                                <div><input type="text" value="fresh money"></input></div>
+                                <table>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>
+                                            <input type="text" onChange={(event) => handleAddress(event, index)}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PhoneNumber</td>
+                                        <td>
+                                            <input type="text" onChange={(event) => handlePhoneNumber(event, index)}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Type</td>
+                                        <td>
+                                            <input type="text" value="fresh money"></input>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         ))
                     }

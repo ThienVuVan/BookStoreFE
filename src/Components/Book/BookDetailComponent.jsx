@@ -82,8 +82,12 @@ function BookDetailComponent() {
         }
     }
 
+    let handleViewShop = () => {
+        Navigate(`/viewshopdetail/${shop.id}`)
+    }
+
     return (
-        <>
+        <div className='bookdetail'>
             <div className="book">
                 <div className="image">
                     {bookImages.map((image) => (
@@ -93,40 +97,39 @@ function BookDetailComponent() {
                 <div className="info">
                     <table>
                         <tr>
-                            <td className='lable'>Title:</td>
                             <td className='title'>{bookData.title}</td>
                         </tr>
                         <tr>
-                            <td>Author:</td>
+                            <td className='label'>author:</td>
                             <td>{bookData.author}</td>
                         </tr>
                         <tr>
-                            <td>Category:</td>
+                            <td className='label'>category:</td>
                             <td>{bookData.category}</td>
                         </tr>
                         <tr>
-                            <td>Price:</td>
-                            <td>{bookData.price}$</td>
+                            <td className='label'>price:</td>
+                            <td className='price'>{bookData.price}$</td>
                         </tr>
                         <tr>
-                            <td>CurrentQuantity:</td>
+                            <td className='label'>current quantity:</td>
                             <td>{bookData.currentQuantity}</td>
                         </tr>
                         <tr>
-                            <td>SoldQuantity:</td>
+                            <td className='label'>soldQuantity:</td>
                             <td>{bookData.soldQuantity}</td>
                         </tr>
                         <tr>
-                            <td>Number:</td>
-                            <td>
-                                <span className="click" onClick={handleMinusBookNumber}>-</span>
-                                <span>{bookNumber}</span>
-                                <span className="click" onClick={handlePlusBookNumber}>+</span>
+                            <td className='label'>number:</td>
+                            <td className='number'>
+                                <li onClick={handleMinusBookNumber}>-</li>
+                                <li>{bookNumber}</li>
+                                <li onClick={handlePlusBookNumber}>+</li>
                             </td>
                         </tr>
                         <tr>
-                            <td><button onClick={handleBuy}>Buy</button></td>
-                            <td><button onClick={handleAddCart}>Add Cart</button></td>
+                            <td className='button'><button onClick={handleBuy}>Buy</button></td>
+                            <td className='button'><button onClick={handleAddCart}>Add Cart</button></td>
                         </tr>
                     </table>
                 </div>
@@ -135,32 +138,28 @@ function BookDetailComponent() {
                 <div className="book-detail">
                     <table>
                         <tr>
-                            <td>Publisher:</td>
-                            <table>{bookData.publisher}</table>
+                            <td className='one'>Publisher</td>
+                            <td className='two'>{bookData.publisher}</td>
                         </tr>
                         <tr>
-                            <td>PublicationDate:</td>
-                            <td>{bookData.publicationDate}</td>
+                            <td className='one'>Publication Date</td>
+                            <td className='two'>{bookData.publicationDate}</td>
                         </tr>
                         <tr>
-                            <td>Dimension:</td>
-                            <td>{bookData.dimension}</td>
+                            <td className='one'>Dimension</td>
+                            <td className='two'>{bookData.dimension}</td>
                         </tr>
                         <tr>
-                            <td>CoverType:</td>
-                            <td>{bookData.coverType}</td>
+                            <td className='one'>Cover Type</td>
+                            <td className='two'>{bookData.coverType}</td>
                         </tr>
                         <tr>
-                            <td>NumberOfPages:</td>
-                            <td>{bookData.numberOfPages}</td>
+                            <td className='one'>Number Of Pages</td>
+                            <td className='two'>{bookData.numberOfPages}</td>
                         </tr>
                         <tr>
-                            <td>PublishingHouse:</td>
-                            <td>{bookData.publishingHouse}</td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td>{bookData.description}</td>
+                            <td className='one'>Publishing House</td>
+                            <td className='two'>{bookData.publishingHouse}</td>
                         </tr>
                     </table>
                 </div>
@@ -172,56 +171,65 @@ function BookDetailComponent() {
                         <div className='detail'>
                             <li className='name'>{shop.shopName}</li>
                             <li className='address'>(.) {shop.shopAddress}</li>
-                            <li><button>View Shop</button></li>
+                            <li><button onClick={handleViewShop}>View Shop</button></li>
                         </div>
-
                     </div>
+                </div>
+            </div>
+            <div className='description'>
+                <div className='label'>
+                    <label>Description</label>
+                </div>
+                <div className='content'>
+                    {bookData.description}
                 </div>
             </div>
             <div className="rate">
                 <table>
                     <tr>
-                        <td>Five Star</td>
+                        <td className='one'>Five Star</td>
                         <td>{rateData.fiveStar}</td>
                     </tr>
                     <tr>
-                        <td>Four Star</td>
+                        <td className='one'>Four Star</td>
                         <td>{rateData.fourStar}</td>
                     </tr>
                     <tr>
-                        <td>Three Star</td>
+                        <td className='one'>Three Star</td>
                         <td>{rateData.threeStar}</td>
                     </tr>
                     <tr>
-                        <td>Two Star</td>
+                        <td className='one'>Two Star</td>
                         <td>{rateData.twoStar}</td>
                     </tr>
                     <tr>
-                        <td>One Star</td>
+                        <td className='one'>One Star</td>
                         <td>{rateData.oneStar}</td>
                     </tr>
                 </table>
             </div>
             <div className="comment">
-                <label>Comment</label>
+                <div className='one'>
+                    <label>Comment</label>
+                </div>
                 {
                     reviewData.map((item) => (
                         <div className="view-comment">
                             <table>
                                 <tr>
                                     <td className='name'>User:</td>
-                                    <td>{item.username}</td>
+                                    <td className='content'>{item.username}</td>
                                 </tr>
                                 <tr>
                                     <td className='name'>Comment:</td>
-                                    <td>{item.comment}</td>
+                                    <td className='content'>{item.comment}</td>
                                 </tr>
                             </table>
                         </div>
                     ))
                 }
             </div>
-        </>
+        </div>
 
     )
 }

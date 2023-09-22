@@ -82,6 +82,8 @@ export let ConfirmOrderApi = (orderId, data, headers) => apiClient.put(`/api/v1/
 export let DeleteOrderApi = (orderId, headers) => apiClient.delete(`/api/v1/orders?orderId=${orderId}`, { headers });
 // http://localhost:8080/api/v1/shops/bookId
 export let GetShopByBookIdApi = (bookId, headers) => apiClient.get(`/api/v1/shops/bookId?bookId=${bookId}`, { headers });
+// http://localhost:8080/api/v1/shops/id
+export let GetShopById = (shopId, headers) => apiClient.get(`/api/v1/shops/id?shopId=${shopId}`, { headers });
 
 
 

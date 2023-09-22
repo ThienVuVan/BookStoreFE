@@ -7,32 +7,18 @@ function HeaderComponent() {
     let Auth = useAuth();
 
     return (
-        <header className="header">
-            <nav className="navbar">
-                <div className='left'>
-                    <Link className='logo' to="/home">BookStore</Link>
-                </div>
-                <div className='right'>
-                    <ul className="ul">
-                        <li className="li">
-                            {!Auth.isAuthenticated && <Link className="link" to="/signup">SignUp</Link>}
-                        </li>
-                        <li className="li">
-                            {!Auth.isAuthenticated && <Link className="link" to="/login">Login</Link>}
-                        </li>
-                        <li className="li">
-                            {Auth.isAuthenticated && <Link className="link" to="/cart">Cart</Link>}
-                        </li>
-                        <li className="navbar-ul-li">
-                            {Auth.isAuthenticated && Auth.roles.includes("ROLE_SHOP") && <Link className="link" to="/shop">Shop</Link>}
-                        </li>
-                        <li className="li">
-                            {Auth.isAuthenticated && <Link className="link" to="/account">Account</Link>}
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <div className='nav'>
+            <div className='left'>
+                <Link className='logo' to="/home">BookStore</Link>
+            </div>
+            <div className='right'>
+                {!Auth.isAuthenticated && <Link className="link" to="/signup">SignUp</Link>}
+                {!Auth.isAuthenticated && <Link className="link" to="/login">Login</Link>}
+                {Auth.isAuthenticated && <Link className="link" to="/cart">Cart</Link>}
+                {Auth.isAuthenticated && Auth.roles.includes("ROLE_SHOP") && <Link className="link" to="/shop">Shop</Link>}
+                {Auth.isAuthenticated && <Link className="link" to="/account">Account</Link>}
+            </div>
+        </div>
     )
 }
 export default HeaderComponent;

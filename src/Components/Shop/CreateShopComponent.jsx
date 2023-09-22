@@ -36,6 +36,7 @@ function CreateShopComponent() {
             try {
                 let response = await CreateShopApi(values, headers)
                 Auth.setRoles(response.data)
+                localStorage.setItem("roles", JSON.stringify(response.data))
                 toast.success("Create Shop Success!")
                 Navigate("/shop")
             } catch (error) {

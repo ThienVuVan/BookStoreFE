@@ -28,6 +28,8 @@ function LoginComponent() {
         onSubmit: async (values) => {
             try {
                 let response = await LoginApi(values)
+                localStorage.setItem("isAuthenticated", JSON.stringify(true))
+                localStorage.setItem("roles", JSON.stringify(response.data.roles))
                 Auth.setAuthenticated(true)
                 Auth.setRoles(response.data.roles);
                 sessionStorage.setItem("userId", response.data.id);
@@ -55,6 +57,8 @@ function LoginComponent() {
                         socialId: decoded.user_id,
                         type: "0"
                     })
+                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
+                    localStorage.setItem("roles", JSON.stringify(response.data.roles))
                     Auth.setAuthenticated(true)
                     Auth.setRoles(response.data.roles);
                     sessionStorage.setItem("userId", response.data.id);
@@ -84,6 +88,8 @@ function LoginComponent() {
                         socialId: decoded.user_id,
                         type: "1"
                     })
+                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
+                    localStorage.setItem("roles", JSON.stringify(response.data.roles))
                     Auth.setAuthenticated(true)
                     Auth.setRoles(response.data.roles);
                     sessionStorage.setItem("userId", response.data.id);
@@ -102,16 +108,6 @@ function LoginComponent() {
     }
 
     // login github
-
-    const handleGithubSignin = () => {
-        signInWithPopup(auth, githubProvider)
-            .then((response) => {
-                console.log(response)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
 
     return (
         <div className="container">
@@ -159,11 +155,6 @@ function LoginComponent() {
                 <div className="facebook">
                     <button onClick={handleFacebookSignin}>
                         Sign in with Facebook
-                    </button>
-                </div>
-                <div className="github">
-                    <button onClick={handleGithubSignin}>
-                        Sign in with Github
                     </button>
                 </div>
             </div>

@@ -70,19 +70,20 @@ function Home() {
     }
 
     return (
-        <div className='home'>
+        <>
             <div className='filter'>
                 <form className="form" onSubmit={filter.handleSubmit}>
-                    <label>Title:</label>
-                    <input type="text" name="title" value={filter.values.id} onChange={filter.handleChange} placeholder='Title' />
-                    <label>Authors:</label>
-                    <input className='authors' type="text" name="authors" value={filter.values.authors} onChange={filter.handleChange} placeholder='Authors' />
-                    <label>Price from:</label>
+                    <label>Title</label>
+                    <input type="text" name="title" value={filter.values.id} onChange={filter.handleChange} placeholder='enter title' />
+                    <label>Authors</label>
+                    <input className='authors' type="text" name="authors" value={filter.values.authors} onChange={filter.handleChange} placeholder='enter authors' />
+                    <label>Price from</label>
                     <input className='price' type="number" name="lowPrice" value={filter.values.lowPrice} onChange={filter.handleChange} />
                     <label>to</label>
                     <input className='price' type="number" name="highPrice" value={filter.values.highPrice} onChange={filter.handleChange} />
-                    <label>Category:</label>
+                    <label>Category</label>
                     <select name="category" value={filter.values.category} onChange={filter.handleChange}>
+                        <option value="">choose</option>
                         <option value="">none</option>
                         {categories.map((category) => {
                             return (
@@ -118,7 +119,8 @@ function Home() {
                 <li onClick={() => handleChangePage(3)}>4</li>
                 <li className='more'>...</li>
             </div>
-        </div>
+        </>
+
     )
 }
 

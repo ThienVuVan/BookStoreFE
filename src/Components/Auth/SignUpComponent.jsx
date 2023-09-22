@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { SignupApi } from '../API/BookStoreApi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './Signup.scss';
 
 function SignUpComponent() {
     let navigate = useNavigate();
@@ -53,10 +54,10 @@ function SignUpComponent() {
     });
 
     return (
-        <div>
+        <div className="signup">
             <form className="infoform" onSubmit={formik.handleSubmit}>
+                <label>UserName</label>
                 <div>
-                    <label> Your name:  </label>
                     <input
                         type="text"
                         id="username"
@@ -69,8 +70,8 @@ function SignUpComponent() {
                         <p className="errorMsg"> {formik.errors.username} </p>
                     )}
                 </div>
+                <label>Email address</label>
                 <div>
-                    <label> Email address </label>
                     <input
                         type="email"
                         id="email"
@@ -83,8 +84,8 @@ function SignUpComponent() {
                         <p className="errorMsg"> {formik.errors.email} </p>
                     )}
                 </div>
+                <label>Password</label>
                 <div>
-                    <label> Password </label>
                     <input
                         type="text"
                         id="password"
@@ -97,8 +98,8 @@ function SignUpComponent() {
                         <p className="errorMsg"> {formik.errors.password} </p>
                     )}
                 </div>
+                <label>Confirm Password</label>
                 <div>
-                    <label> Confirm Password </label>
                     <input
                         type="text"
                         id="confirmedPassword"
@@ -111,8 +112,8 @@ function SignUpComponent() {
                         <p className="errorMsg"> {formik.errors.confirmedPassword} </p>
                     )}
                 </div>
+                <label>Phone number</label>
                 <div>
-                    <label> Phone number </label>
                     <input
                         type="text"
                         id="phoneNumber"

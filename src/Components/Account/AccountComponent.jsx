@@ -129,12 +129,20 @@ function AccountComponent() {
         <>
             <div className='account'>
                 <div className='info'>
-                    <ul>
-                        <li>Id : {userData.id}</li>
-                        <li>Username:  {userData.username}</li>
-                        <li>Email:  {userData.email}</li>
-                        <li>Phonenumber:  {userData.phoneNumber}</li>
-                    </ul>
+                    <table>
+                        <tr>
+                            <td className='one'>Username:</td>
+                            <td>{userData.username}</td>
+                        </tr>
+                        <tr>
+                            <td className='one'>Email:</td>
+                            <td>{userData.email}</td>
+                        </tr>
+                        <tr>
+                            <td className='one'>Phonenumber:</td>
+                            <td>{userData.phoneNumber}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div className='setting'>
                     <div><button onClick={handleUpdateAccont}>Update Account</button></div>

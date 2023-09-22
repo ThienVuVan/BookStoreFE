@@ -1,0 +1,29 @@
+.signup {
+    display: flex;
+    justify-content: center;
+
+    .infoform {
+        width: 35%;
+        border: 1px solid #ccc;
+        background-color: #ccc;
+        border-radius: 10px;
+        margin-top: 20px;
+
+        label {
+            margin: 5px 0;
+        }
+
+        input {
+            border-radius: 5px;
+            border: 1px solid;
+        }
+
+        button {
+            margin: 5px;
+            border-radius: 5px;
+            border-width: 1px;
+            color: azure;
+            background-color: rgb(245, 101, 48);
+        }
+    }
+}

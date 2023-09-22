@@ -1,42 +1,50 @@
-.header {
-    border-bottom: 2px black solid;
+.nav {
+    display: flex;
+    background-color: rgb(245, 101, 48);
+    height: 60px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 2;
 
-    .navbar {
+    .left {
+        width: 20%;
         display: flex;
-        padding-right: 20px;
-        padding-left: 20px;
+        justify-content: center;
 
-        .left {
-            width: 20%;
+        .logo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+            color: azure;
+            font-size: 2rem;
+            font-weight: bold;
 
-            .logo {
-                color: black;
-                text-decoration: none;
-                font-size: 2rem;
-                font-weight: bold;
+            &:hover {
+                color: rgb(243, 189, 170);
             }
         }
+    }
 
-        .right {
-            width: 80%;
+    .right {
+        width: 80%;
+        display: flex;
+        justify-content: right;
+        padding-right: 5%;
 
-            ul {
-                list-style: none;
-                display: flex;
-                gap: 1rem;
-                font-size: 1.5rem;
-                float: right;
 
-                li {
-                    .link {
-                        text-decoration: none;
-                        color: black;
+        .link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            color: azure;
 
-                        &:hover {
-                            color: orangered;
-                        }
-                    }
-                }
+            &:hover {
+                color: rgb(243, 189, 170);
             }
         }
     }
