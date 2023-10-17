@@ -4,6 +4,7 @@
     .book {
         display: flex;
         text-align: left;
+        margin: 0;
 
         .image {
             border: 2px solid #ccc;
@@ -117,7 +118,7 @@
             }
 
             .shop-image {
-                width: 35%;
+                width: 42%;
                 display: flex;
                 justify-content: center;
 
@@ -129,7 +130,7 @@
             }
 
             .shop-info {
-                width: 65%;
+                width: 58%;
 
                 li {
                     margin: 5px 0;

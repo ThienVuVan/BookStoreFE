@@ -6,7 +6,7 @@ import { LoginApi, LoginSocialApi } from "../API/BookStoreApi";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import { signInWithPopup } from "firebase/auth";
-import { auth, facebookProvider, googleProvider, githubProvider } from "../../Configuration/FirebaseConfig";
+import { auth, facebookProvider, googleProvider } from "../../Configuration/FirebaseConfig";
 import './Login.scss';
 
 
@@ -28,10 +28,10 @@ function LoginComponent() {
         onSubmit: async (values) => {
             try {
                 let response = await LoginApi(values)
-                localStorage.setItem("isAuthenticated", JSON.stringify(true))
-                localStorage.setItem("roles", JSON.stringify(response.data.roles))
                 Auth.setAuthenticated(true)
                 Auth.setRoles(response.data.roles);
+                sessionStorage.setItem("isAuthenticated", JSON.stringify(true))
+                sessionStorage.setItem("roles", JSON.stringify(response.data.roles))
                 sessionStorage.setItem("userId", response.data.id);
                 sessionStorage.setItem("username", response.data.username)
                 sessionStorage.setItem("token", response.data.token)
@@ -57,10 +57,10 @@ function LoginComponent() {
                         socialId: decoded.user_id,
                         type: "0"
                     })
-                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
-                    localStorage.setItem("roles", JSON.stringify(response.data.roles))
                     Auth.setAuthenticated(true)
                     Auth.setRoles(response.data.roles);
+                    sessionStorage.setItem("isAuthenticated", JSON.stringify(true))
+                    sessionStorage.setItem("roles", JSON.stringify(response.data.roles))
                     sessionStorage.setItem("userId", response.data.id);
                     sessionStorage.setItem("username", response.data.username)
                     sessionStorage.setItem("token", response.data.token)
@@ -88,10 +88,10 @@ function LoginComponent() {
                         socialId: decoded.user_id,
                         type: "1"
                     })
-                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
-                    localStorage.setItem("roles", JSON.stringify(response.data.roles))
                     Auth.setAuthenticated(true)
                     Auth.setRoles(response.data.roles);
+                    sessionStorage.setItem("isAuthenticated", JSON.stringify(true))
+                    sessionStorage.setItem("roles", JSON.stringify(response.data.roles))
                     sessionStorage.setItem("userId", response.data.id);
                     sessionStorage.setItem("username", response.data.username)
                     sessionStorage.setItem("token", response.data.token)
@@ -131,7 +131,7 @@ function LoginComponent() {
                         <label>Password</label>
                         <div>
                             <input
-                                type="text"
+                                type="password"
                                 id="password"
                                 name="password"
                                 value={formik.values.password}
@@ -149,12 +149,12 @@ function LoginComponent() {
                 </div>
                 <div className="google">
                     <button onClick={handleGoogleSignin}>
-                        Sign in with Google
+                        Login with Google
                     </button>
                 </div>
                 <div className="facebook">
                     <button onClick={handleFacebookSignin}>
-                        Sign in with Facebook
+                        Login with Facebook
                     </button>
                 </div>
             </div>

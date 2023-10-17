@@ -2,7 +2,9 @@
     border-bottom: 1px solid #ccc;
 
     .form {
+        padding: 10px;
         display: flex;
+        text-align: left;
 
         .shop-info {
             width: 45%;
@@ -11,6 +13,7 @@
         }
 
         .shopdetail-info {
+            padding-left: 10px;
             width: 45%;
             display: block;
             border-right: 1px solid #ccc;
@@ -18,9 +21,13 @@
 
         .setting {
             width: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
             button {
-                margin-top: 65px;
+                width: fit-content;
                 border-radius: 5px;
                 color: aqua;
                 background-color: black;

@@ -51,7 +51,6 @@ function AccountComponent() {
     let handleEvaluate = async (orderId) => {
         try {
             let response = await GetOrderItemsApi(orderId, headers)
-            console.log(response.data)
             setOrderItems(response.data)
             setOrderId(orderId)
             setEvaluate(true)

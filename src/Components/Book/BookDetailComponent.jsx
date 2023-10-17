@@ -25,7 +25,6 @@ function BookDetailComponent() {
             let response1 = await GetBookDetailByIdApi(id, headers)
             setBookData(response1.data)
             setBookImages(response1.data.images)
-
             let response2 = await GetReviewApi(id, 0, headers)
             setReviewData(response2.data)
 
@@ -47,7 +46,9 @@ function BookDetailComponent() {
 
 
     let handleMinusBookNumber = () => {
-        setBookNumber(bookNumber - 1)
+        if (bookNumber > 1) {
+            setBookNumber(bookNumber - 1)
+        }
     }
     let handlePlusBookNumber = () => {
         setBookNumber(bookNumber + 1)
@@ -72,16 +73,6 @@ function BookDetailComponent() {
         }
     }
 
-    let handleBuy = () => {
-        if (Auth.isAuthenticated) {
-
-        }
-        else {
-            toast.warn("Please Login!")
-            Navigate("/login")
-        }
-    }
-
     let handleViewShop = () => {
         Navigate(`/viewshopdetail/${shop.id}`)
     }
@@ -91,7 +82,7 @@ function BookDetailComponent() {
             <div className="book">
                 <div className="image">
                     {bookImages.map((image) => (
-                        <img src={image.substring(30)} alt="" />
+                        < img src={image.substring(23)} alt="" />
                     ))}
                 </div>
                 <div className="info">
@@ -128,7 +119,6 @@ function BookDetailComponent() {
                             </td>
                         </tr>
                         <tr>
-                            <td className='button'><button onClick={handleBuy}>Buy</button></td>
                             <td className='button'><button onClick={handleAddCart}>Add Cart</button></td>
                         </tr>
                     </table>
@@ -165,7 +155,7 @@ function BookDetailComponent() {
                 </div>
                 <div className='shop'>
                     <div className='shop-image'>
-                        {isloadshop && <img src={shop.shopLogoPath.substring(30)}></img>}
+                        {isloadshop && <img src={shop.shopLogoPath.substring(23)}></img>}
                     </div>
                     <div className='shop-info'>
                         <div className='detail'>

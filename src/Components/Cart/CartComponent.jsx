@@ -122,10 +122,12 @@ function CartComponent() {
     }
 
     let handleMinusBookNumber = (index) => {
-        CartList[index].bookNumber -= 1;
-        const updatedCartList = [...CartList]
-        localStorage.setItem("BookIdCartList", JSON.stringify(updatedCartList))
-        setBookNumberChange(!bookNumberChange)
+        if (CartList[index].bookNumber > 1) {
+            CartList[index].bookNumber -= 1;
+            const updatedCartList = [...CartList]
+            localStorage.setItem("BookIdCartList", JSON.stringify(updatedCartList))
+            setBookNumberChange(!bookNumberChange)
+        }
     }
 
     let handlePlusBookNumber = (index) => {
@@ -175,7 +177,7 @@ function CartComponent() {
                     {
                         cartData.map((item, index) => (
                             <div key={index} className="cart-item">
-                                <div className="image"><img src={item.imagePath.substring(30)} /></div>
+                                <div className="image"><img src={item.imagePath.substring(23)} /></div>
                                 <div className="title">{item.title}</div>
                                 <div className="price">{item.price} $</div>
                                 <div className="number">

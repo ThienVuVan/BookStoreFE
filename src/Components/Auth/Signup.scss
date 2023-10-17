@@ -2,28 +2,60 @@
     display: flex;
     justify-content: center;
 
-    .infoform {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 35%;
         border: 1px solid #ccc;
         background-color: #ccc;
         border-radius: 10px;
+        padding: 0;
         margin-top: 20px;
 
-        label {
-            margin: 5px 0;
+        .local {
+            .infoform {
+                label {
+                    margin: 5px 0;
+                }
+
+                input {
+                    border-radius: 5px;
+                    border: 1px solid;
+                }
+
+                button {
+                    margin: 5px;
+                    border-radius: 5px;
+                    border-width: 1px;
+                    color: azure;
+                    background-color: rgb(245, 101, 48);
+                }
+            }
         }
 
-        input {
-            border-radius: 5px;
-            border: 1px solid;
+        .google {
+            margin-top: 10px;
+
+            button {
+                color: black;
+                background-color: azure;
+                border-radius: 5px;
+                border: 1px solid azure;
+            }
+
         }
 
-        button {
-            margin: 5px;
-            border-radius: 5px;
-            border-width: 1px;
-            color: azure;
-            background-color: rgb(245, 101, 48);
+        .facebook {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            button {
+                color: white;
+                background-color: rgb(77, 77, 248);
+                border-radius: 5px;
+                border: 1px solid rgb(77, 77, 248);
+            }
         }
     }
 }

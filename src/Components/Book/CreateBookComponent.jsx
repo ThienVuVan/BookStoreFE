@@ -35,9 +35,12 @@ function CreateBookComponent() {
             images: [],
         },
         validationSchema: Yup.object({
-            title: Yup.string().required("Required"),
-            price: Yup.string().required("Required"),
-            currentQuantity: Yup.string().required("Required")
+            title: Yup.string().required("Required").min(1, "Must be 1 characters or more"),
+            price: Yup.string().required("Required").matches(/^[0-9]\d*(\.\d+)?$/, "invalid price"),
+            currentQuantity: Yup.string().required("Required").matches(/^[1-9]\d*$/, "must be integer"),
+            author: Yup.string().required("Required"),
+            categoryId: Yup.string().required("Required"),
+            images: Yup.array().min(1, "At least one image is required")
         }),
         onSubmit: async (values) => {
             try {
@@ -77,7 +80,7 @@ function CreateBookComponent() {
                         <tr>
                             <td>Price:</td>
                             <td>
-                                <input type="number" name="price" value={formik.values.price}
+                                <input type="text" name="price" value={formik.values.price}
                                     onChange={formik.handleChange}
                                     placeholder="Enter your price"
                                 />
@@ -92,6 +95,7 @@ function CreateBookComponent() {
                                 <input type="number" name="currentQuantity" value={formik.values.currentQuantity}
                                     onChange={formik.handleChange}
                                     placeholder="Enter your currentQuantity"
+                                    min={0}
                                 />
                                 {formik.errors.currentQuantity && (
                                     <p className="errorMsg"> {formik.errors.currentQuantity} </p>
@@ -105,6 +109,9 @@ function CreateBookComponent() {
                                     onChange={formik.handleChange}
                                     placeholder="Enter your author"
                                 />
+                                {formik.errors.author && (
+                                    <p className="errorMsg"> {formik.errors.author} </p>
+                                )}
                             </td>
                         </tr>
                         <tr>
@@ -114,21 +121,31 @@ function CreateBookComponent() {
                                     <option value="">none</option>
                                     {categories.map((category) => {
                                         return (
-                                            category.subcategories.map((subcategory) => (
-                                                <option value={subcategory.id}>{subcategory.name}</option>
-                                            ))
+                                            <optgroup label={category.name}>
+                                                {category.subcategories.map((subcategory) => (
+                                                    <option value={subcategory.id}>{subcategory.name}</option>
+                                                ))}
+                                            </optgroup>
                                         )
                                     })
                                     }
                                 </select>
+                                {formik.errors.categoryId && (
+                                    <p className="errorMsg"> {formik.errors.categoryId} </p>
+                                )}
                             </td>
                         </tr>
                         <tr>
-                            <td>Image:</td>
+                            <td>Image: <br />(less than 5mb)</td>
                             <td>
-                                <input type="file" name="image1" accept="image/*" onChange={handleImageChange} />
-                                <input type="file" name="image2" accept="image/*" onChange={handleImageChange} />
-                                <input type="file" name="image3" accept="image/*" onChange={handleImageChange} />
+                                <tr><input type="file" name="image1" accept="image/*" onChange={handleImageChange} /></tr>
+                                <tr> <input type="file" name="image2" accept="image/*" onChange={handleImageChange} /></tr>
+                                <tr><input type="file" name="image3" accept="image/*" onChange={handleImageChange} /></tr>
+                                <tr>
+                                    {formik.errors.images && (
+                                        <p className="errorMsg"> {formik.errors.images} </p>
+                                    )}
+                                </tr>
                             </td>
                         </tr>
                     </table>
@@ -175,6 +192,7 @@ function CreateBookComponent() {
                                 <input type="number" name="numberOfPages" value={formik.values.numberOfPages}
                                     onChange={formik.handleChange}
                                     placeholder="Enter your numberOfPages"
+                                    min={0}
                                 />
                             </td>
                         </tr>

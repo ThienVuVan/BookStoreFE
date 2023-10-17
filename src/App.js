@@ -71,7 +71,6 @@ function App() {
             pauseOnHover
             theme="light"
           />
-          {/* <FooterComponent /> */}
         </BrowserRouter>
       </AuthProvider>
     </div>

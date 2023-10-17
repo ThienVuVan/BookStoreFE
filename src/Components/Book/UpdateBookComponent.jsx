@@ -72,7 +72,6 @@ function UpdateBookComponent() {
         validationSchema: Yup.object({
         }),
         onSubmit: async (values) => {
-            console.log(values)
             try {
                 await UpdateBookApi(id, values, headers)
                 Navigate("/shop")
@@ -98,7 +97,7 @@ function UpdateBookComponent() {
                         <table>
                             {bookImages.map((image) => {
                                 return (
-                                    <tr>Image: {image}</tr>
+                                    <tr>Image: {image.substring(31)}</tr>
                                 )
                             })}
                             <tr>Select new images</tr>
@@ -125,6 +124,7 @@ function UpdateBookComponent() {
                                 <td>
                                     <input type="number" name="price" value={formik.values.price}
                                         onChange={formik.handleChange}
+                                        min={0}
                                     />
                                     {formik.errors.price && (
                                         <p className="errorMsg"> {formik.errors.price} </p>
@@ -136,6 +136,7 @@ function UpdateBookComponent() {
                                 <td>
                                     <input type="number" name="currentQuantity" value={formik.values.currentQuantity}
                                         onChange={formik.handleChange}
+                                        min={0}
                                     />
                                 </td>
                             </tr>
@@ -162,9 +163,11 @@ function UpdateBookComponent() {
                                         <option value="">none</option>
                                         {categories.map((category) => {
                                             return (
-                                                category.subcategories.map((subcategory) => (
-                                                    <option value={subcategory.id}>{subcategory.name}</option>
-                                                ))
+                                                <optgroup label={category.name}>
+                                                    {category.subcategories.map((subcategory) => (
+                                                        <option value={subcategory.id}>{subcategory.name}</option>
+                                                    ))}
+                                                </optgroup>
                                             )
                                         })
                                         }

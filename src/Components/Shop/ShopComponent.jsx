@@ -24,7 +24,7 @@ function ShopComponent() {
             let response = await GetShopApi(sessionStorage.getItem("userId"), headers);
             sessionStorage.setItem("shopId", response.data.id)
             setShopData(response.data)
-            setShopLogoPath(response.data.shopLogoPath.substring(30))
+            setShopLogoPath(response.data.shopLogoPath.substring(23))
         }
         catch (error) {
             console.log(error);
@@ -35,7 +35,6 @@ function ShopComponent() {
         try {
             let response = await GetBookForShopApi(sessionStorage.getItem("shopId"), headers)
             setBookData(response.data)
-            console.log(response.data)
         }
         catch (error) {
             console.log(error)
@@ -63,7 +62,7 @@ function ShopComponent() {
         try {
             let response = await DeleteShopApi(sessionStorage.getItem("userId"), sessionStorage.getItem("shopId"), headers);
             Auth.setRoles(response.data);
-            localStorage.setItem("roles", JSON.stringify(response.data))
+            sessionStorage.setItem("roles", JSON.stringify(response.data))
             toast.success("Delete Shop Success!")
             Navigate("/account")
         }
@@ -74,7 +73,6 @@ function ShopComponent() {
     }
 
     let handleDeleteBook = async (bookId) => {
-        console.log(bookId)
         try {
             await DeleteBookForShopApi(bookId, headers)
             setDeleteBookMark(!deleteBookMark)

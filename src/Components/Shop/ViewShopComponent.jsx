@@ -17,7 +17,7 @@ function ViewShopComponent() {
         try {
             let response1 = await GetShopById(shopId, headers)
             setShopData(response1.data)
-            setShopLogo(response1.data.shopLogoPath.substring(30))
+            setShopLogo(response1.data.shopLogoPath.substring(23))
             let response2 = await GetBookForShopApi(shopId, headers)
             setBookData(response2.data)
         }
@@ -65,7 +65,7 @@ function ViewShopComponent() {
                 {bookData.map((book) => (
                     <div className='item' onClick={() => handleViewDetail(book.id)}>
                         <div className='image'>
-                            <img className='image-item' src={book.imagePath.substring(30)} />
+                            <img className='image-item' src={book.imagePath.substring(23)} />
                         </div>
                         <div className='info'>
                             <div className='title'>{book.title}</div>

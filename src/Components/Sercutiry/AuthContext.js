@@ -26,9 +26,9 @@ function AuthProvider({ children }) {
     useEffect(() => {
         retrieveCategory()
         // for reload windows;
-        if (JSON.parse(localStorage.getItem("isAuthenticated")) && JSON.parse(localStorage.getItem("roles"))) {
-            setAuthenticated(JSON.parse(localStorage.getItem("isAuthenticated")))
-            setRoles(JSON.parse(localStorage.getItem("roles")))
+        if (JSON.parse(sessionStorage.getItem("isAuthenticated")) && JSON.parse(sessionStorage.getItem("roles"))) {
+            setAuthenticated(JSON.parse(sessionStorage.getItem("isAuthenticated")))
+            setRoles(JSON.parse(sessionStorage.getItem("roles")))
         }
     }, [])
 
@@ -37,8 +37,6 @@ function AuthProvider({ children }) {
         setAuthenticated(false);
         setRoles([])
         sessionStorage.clear()
-        localStorage.removeItem("isAuthenticated")
-        localStorage.removeItem("roles")
     }
 
     return (

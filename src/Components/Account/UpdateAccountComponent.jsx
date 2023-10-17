@@ -26,7 +26,6 @@ function UpdateAccountComponent() {
             // email: Yup.string().required("Required")
         }),
         onSubmit: async (values) => {
-            console.log(values);
             try {
                 let response = await UpdateUser(values, headers);
                 sessionStorage.setItem("username", response.data.username)

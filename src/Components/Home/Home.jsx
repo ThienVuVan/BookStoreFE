@@ -6,6 +6,10 @@ import { useFormik } from "formik";
 import { useAuth } from '../Sercutiry/AuthContext';
 
 function Home() {
+    // set cart
+    if (JSON.parse(localStorage.getItem("BookIdCartList")) === null) {
+        localStorage.setItem("BookIdCartList", JSON.stringify([]))
+    }
     let Navigate = useNavigate()
     let [bookData, setBookData] = useState([])
     const headers = {
@@ -45,8 +49,6 @@ function Home() {
         },
         onSubmit: async (values) => {
             if (values.category === "") values.category = null;
-            console.log(values)
-
             try {
                 let response = await GetBookByCondition(values, headers)
                 setBookData(response.data)
@@ -83,13 +85,14 @@ function Home() {
                     <input className='price' type="number" name="highPrice" value={filter.values.highPrice} onChange={filter.handleChange} />
                     <label>Category</label>
                     <select name="category" value={filter.values.category} onChange={filter.handleChange}>
-                        <option value="">choose</option>
                         <option value="">none</option>
                         {categories.map((category) => {
                             return (
-                                category.subcategories.map((subcategory) => (
-                                    <option value={subcategory.name}>{subcategory.name}</option>
-                                ))
+                                <optgroup label={category.name}>
+                                    {category.subcategories.map((subcategory) => (
+                                        <option value={subcategory.name}>{subcategory.name}</option>
+                                    ))}
+                                </optgroup>
                             )
                         })
                         }
@@ -101,7 +104,7 @@ function Home() {
                 {bookData.map((book) => (
                     <div className='item' onClick={() => handleViewDetail(book.id)}>
                         <div className='image'>
-                            <img className='image-item' src={book.imagePath.substring(30)} />
+                            <img className='image-item' src={book.imagePath.substring(23)} />
                         </div>
                         <div className='info'>
                             <div className='title'>{book.title}</div>
