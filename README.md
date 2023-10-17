@@ -1,4 +1,4 @@
-# BookStoreBE
+# BookStoreFE
 <ul>
   <li>Description: A website serving for book browsing, purchasing, reviewing, and assisting users in setting up shops to manage and sell books.</li>
   <li>Website: bookstore.io.vn</li>
