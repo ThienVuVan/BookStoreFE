@@ -7,5 +7,4 @@
   <li>Tech Stack Deployment: Linux server, Docker egine(run Backend), Nginx server, CloudFlare.</li>
   <li>APIs : bookstore.io.vn/swagger-ui/index.html</li>
   <li>Life Span Website: 70 days remaining from 2023-10-17 (until Database Hosting Expires - update after).</li>
-  <li>Update: Website has been terminated, i am looking for new could service.</li>
 </ul>
